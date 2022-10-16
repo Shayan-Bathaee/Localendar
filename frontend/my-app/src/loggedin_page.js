@@ -12,7 +12,9 @@ class ProfileBox extends React.Component {
   class LogoutButton extends React.Component {
     render() {
       return (
-        <p>Logout Button goes here</p>
+        <div>
+          <button onClick= { (e) => handleSignOut(e) }>Sign Out</button>
+        </div>
       );
     }
   }
