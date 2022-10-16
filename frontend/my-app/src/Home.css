@@ -93,12 +93,14 @@
 #viewProfile {
     border-top: solid 2px rgb(0, 0, 0);
     height: 20px;
-    width: 100%;
+    width: 85%;
     margin-top: 30px;
     color: #F2F2E9;
     font-size: 30px;
     text-align: center;
     padding-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #createPost {
