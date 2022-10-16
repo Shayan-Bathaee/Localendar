@@ -48,3 +48,52 @@
   margin-left: 1rem;
   margin-right: 1rem;
 }
+
+.header-div {
+  text-align: center;
+  width: 100%;
+  max-width: 30rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+.profile-box {
+  width: 100%;
+  max-width: 15rem;
+  height: 15rem;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 2rem;
+  background-color: #f3f3eb;
+}
+
+.profile-box p {
+  background-color: transparent;
+}
+
+h1 {
+  font-family: "Verdana";
+  font-size: x-large;
+  color: #32548b;
+}
+
+.logout-button {
+  width: 100%;
+  max-width: 8rem;
+  height: 3rem;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 2rem;
+  background-color: #f3f3eb;
+}
+
+.logout-button p {
+  background-color: transparent;
+}
