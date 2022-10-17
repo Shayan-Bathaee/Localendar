@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  postgres:
+    container_name: Localendar
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./db/schema.sql:/docker-entrypoint-initb.d/schema.sql
+      - ./db/data.sql:/docker-entrypoint-initb.d/data.sql
+    ports:
+      - '5432:5432'
