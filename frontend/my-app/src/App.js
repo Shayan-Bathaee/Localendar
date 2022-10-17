@@ -1,9 +1,9 @@
 import logo from './img/LocalendarLogo.svg';
-import './App.css';
 import React, { useCallback } from 'react';
+import './App.css';
 import { useEffect, useState } from 'react';
 import jwt_decode from "jwt-decode";
-import LoggedIn from "./loggedin_page";
+import { Navigate } from "react-router-dom";
 
 class LoginBox extends React.Component {
   render() {
@@ -16,20 +16,18 @@ class LoginBox extends React.Component {
 function App() {
   // state not designed to be used cross components
   const [ user, setUser ] = useState({});
+  const [ redirectHome, setRedirectHome ] = useState(false)
 
   function handleSignIn(response) {
     var user_object = jwt_decode(response.credential);
-    console.log(user_object);
     setUser(user_object);
-    window.user = user;
     document.getElementById("sign-in-div").hidden = true;
-    console.log(useState);
-    //window.location.href = "./loggedin_page"
-    //LoggedIn();
+    window.profile_name = user_object.name;
+    setRedirectHome(true);
   }
   function handleSignOut(event) {
     setUser({});
-    document.getElementById("sign-in-div").hidden = false;
+    setRedirectHome(false)
   }
 
   useEffect(() => {
@@ -46,30 +44,18 @@ function App() {
   }, []);
 
   return (
-    <div className='home'>
-      <div className='logo-div'>
-        <img src={logo} alt='logo' className='logo'/>
-      </div>
-      <div className='login-border'>
-        <div className='login-box'>
-          <LoginBox/>
-          {
-            // show signout button after sign in only
-            Object.keys(user).length != 0 &&
-            <div>
-              <button onClick= { (e) => handleSignOut(e) }>Sign Out</button>
-              <LoggedIn/>
-            </div>
-          }
-          {
-            // show user profile pic
-            user &&
-            <div>
-              <img src={user.picture}></img>
-            </div>
-            //LoggedIn()
-          }
-          
+    <div>
+      <div className='home'>
+        <div className='logoDiv'>
+          <img src={logo} alt='logo' className='logoClass'/>
+          <div className='loginBox'>
+          <div>
+            <LoginBox/>
+            { redirectHome &&
+              <Navigate to="/homepage" replace={true}/>
+            }
+          </div>
+        </div>
         </div>
       </div>
     </div>

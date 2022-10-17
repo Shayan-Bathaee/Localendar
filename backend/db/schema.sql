@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS testData;
+
+CREATE TABLE testData(userName VARCHAR(16));
