@@ -3,6 +3,7 @@ import './App.css';
 import React, { useCallback } from 'react';
 import { useEffect, useState } from 'react';
 import jwt_decode from "jwt-decode";
+import LoggedIn from "./loggedin_page";
 
 class LoginBox extends React.Component {
   render() {
@@ -57,9 +58,8 @@ function App() {
             Object.keys(user).length != 0 &&
             <div>
               <button onClick= { (e) => handleSignOut(e) }>Sign Out</button>
+              <LoggedIn/>
             </div>
-            //<LogoutButton/>
-            //LoggedIn();
           }
           {
             // show user profile pic

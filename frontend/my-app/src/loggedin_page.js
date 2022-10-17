@@ -1,5 +1,6 @@
 import './App.css';
 import React from 'react';
+import App from './App';
 
 class ProfileBox extends React.Component {
     render() {
@@ -12,9 +13,7 @@ class ProfileBox extends React.Component {
   class LogoutButton extends React.Component {
     render() {
       return (
-        <div>
-          <button onClick= { (e) => handleSignOut(e) }>Sign Out</button>
-        </div>
+        <p>Logout Button goes here</p>
       );
     }
   }
