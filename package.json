@@ -17,5 +17,10 @@
     "start": "(npm run start-backend) & (npm run start-frontend)",
     "zip": "bestzip Assignment8.Submission.zip e2e/tests/* frontend/src/* backend/sql/* backend/src/* backend/api/*",
     "postinstall": "(npm run install-backend) && (npm run install-frontend) && (npm run install-e2e)"
+  },
+  "dependencies": {
+    "jwt-decode": "^3.1.2",
+    "react-router-dom": "^6.4.2",
+    "web-vitals": "^3.0.3"
   }
 }
