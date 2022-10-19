@@ -1,0 +1,88 @@
+#
+# Localendar Backend
+#
+
+openapi: '3.0.3'
+
+info:
+  description: Localendar Backend
+  version: 0.1.0
+  title: Backend
+
+servers:
+  - url: http://localhost:3010/v0
+
+paths:
+  /homepage:
+    get:
+      description: Homepage Endpoint
+      responses:
+        200:
+          description: Succesful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DummyResponse'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      description: Login
+      requestBody:
+        description: Request Body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        200:
+          description: Books Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+            
+
+components:
+  schemas:
+    Error:
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+      required:
+        - code
+        - message
+
+    DummyResponse:
+      properties:
+        message:
+          type: string
+      required:
+        - message
+
+    User:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        pic:
+          type: string
+      required:
+        - name
+        - email
