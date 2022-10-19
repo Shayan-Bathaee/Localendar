@@ -12,7 +12,6 @@ import jwt_decode from "jwt-decode";
  * @return {object} JSX
  */
 function Login() {
-  // const [dummy, setDummy] = React.useState('Click the button!');
   const [homeDisplay, setHomeDisplay] = React.useState('none');
   const [loginDisplay, setLoginDisplay] = React.useState('block');
 
