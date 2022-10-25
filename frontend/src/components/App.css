@@ -34,6 +34,12 @@ html, body {
   margin-right: auto;
   border-radius: 20px;
   background-color: #f3f3eb;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
 
 .header-div {
@@ -83,4 +89,8 @@ h1 {
 
 .logout-button p {
   background-color: transparent;
+}
+
+#signInDiv {
+  margin-bottom: 7%;
 }

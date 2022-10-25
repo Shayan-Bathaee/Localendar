@@ -83,9 +83,7 @@ function Login() {
           <div className='logoDiv'>
             <img src={logo} alt='logo' className='logoClass'/>
             <div className='loginBox'>
-              <div>
                 <div id = "signInDiv"></div>
-              </div>
             </div>
           </div>
         </div>
