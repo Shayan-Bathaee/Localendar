@@ -1,0 +1,44 @@
+body {
+    background-color: #F2F2E9;
+}
+
+.page-title {
+    font-family: "Verdana";
+    font-size: xx-large;
+    color: #32548b;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.event-form input, textarea{
+    display: inline-flexbox;
+    width: 80%;
+    padding: .5rem .8rem .5rem .8rem;
+    margin: .9vw 0 ;
+    border:0;
+    border-radius: 10px;
+    font-size: 20px;
+    align-items: stretch;
+    margin-left: 40px;
+}
+
+.event-form textarea{
+    height: 15vh;
+}
+
+.event-form label {
+    display: block;
+    flex-direction: row;
+    justify-content: flex-end;
+    text-align: right;
+    width: 95%;
+    line-height: 26px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    margin-right: 10px;
+  }
+
+#description-box {
+    height: 50px;
+  }
+
