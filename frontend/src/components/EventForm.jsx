@@ -3,6 +3,42 @@ import "./EventForm.css";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
+
+var event = {
+  eventname: "Steve's birthday party",
+  email: "steve@ucsc.com",
+  eventdate: "2022-12-14",
+  eventtime: "12:00:00",
+  eventlocation: "95060",
+  eventdescription: "fat rager for steve's birthday"
+};
+
+function writeEventToDB() {
+  /* write event to database */
+  fetch('http://localhost:3010/v0/eventform', {
+      method: 'POST',
+      body: JSON.stringify(event), // currently, 'event' is the hardcoded event above
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        if (!res.ok) {
+          throw res;
+        } return res.json();
+      })
+      .then((json) => {
+        console.log('valid event');
+        console.log(json);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert('Error setting up event');
+      });
+}
+
+
 function NewEvent() {
   const [inputs, setInputs] = useState({});
 
@@ -80,7 +116,7 @@ function NewEvent() {
           </label>
           <br></br>
           <button className="cancel-bttn "type="button" onClick={cancel}>Cancel</button>
-          <button className="post-bttn" type="submit">Post</button>
+          <button className="post-bttn" type="submit" onClick={writeEventToDB}>Post</button>
         </form>
       </div>
     </div>

@@ -3,15 +3,6 @@ import React from 'react';
 import './Home.css';
 import {useNavigate} from 'react-router-dom';
 
-var event = {
-  eventname: "Steve's birthday party",
-  email: "steve@ucsc.com",
-  eventdate: "2022-12-14",
-  eventtime: "12:00:00",
-  eventlocation: "95060",
-  eventdescription: "fat rager for steve's birthday"
-};
-
 
 /**
  * @return {object} JSX Table

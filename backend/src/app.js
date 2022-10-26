@@ -7,6 +7,7 @@ const path = require('path');
 const OpenApiValidator = require('express-openapi-validator');
 
 const auth = require('./auth');
+const event = require('./event');
 
 const app = express();
 app.use(cors());
@@ -28,6 +29,7 @@ app.use(
 
 app.get('/v0/homepage', auth.get);
 app.post('/v0/homepage', auth.post);
+app.post('/v0/eventform', event.post);
 // Your routes go here
 
 app.use((err, req, res, next) => {

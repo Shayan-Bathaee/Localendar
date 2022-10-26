@@ -52,6 +52,45 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+  /eventform:
+      get:
+        description: Event Creator Endpoint
+        responses:
+          200:
+            description: Succesful
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/DummyResponse'
+          default:
+            description: unexpected error
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+      post:
+        description: Create Event
+        requestBody:
+          description: Request Body
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        responses:
+          200:
+            description: Books Response
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Event'
+          default:
+            description: Unexpected Error
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+
             
 
 components:
@@ -86,3 +125,25 @@ components:
       required:
         - name
         - email
+
+    Event:
+      type: object
+      properties:
+        eventname:
+          type: string
+        email:
+          type: string
+        eventdate:
+          type: string
+        eventtime:
+          type: string
+        eventlocation:
+          type: string
+        eventdescription:
+          type: string
+      required:
+        - eventname
+        - email
+        - eventdate
+        - eventtime
+        - eventlocation
