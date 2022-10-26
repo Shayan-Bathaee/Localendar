@@ -1,7 +1,7 @@
 import React from "react";
 import "./EventForm.css";
 import { useState } from "react";
-//import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router";
 
 function NewEvent() {
   const [inputs, setInputs] = useState({});
@@ -17,8 +17,10 @@ function NewEvent() {
     console.log(inputs);
   };
 
+  const history = useNavigate();
+
   const cancel = () => {
-    history('/');
+    history('/homepage');
   }
 
   return (
