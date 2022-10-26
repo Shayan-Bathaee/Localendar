@@ -39,22 +39,99 @@
 
 #eventsContainer {
     height: 100%;
-    width: 100%;
-    background-color: rgb(214, 196, 171);
-    padding-top: 83px;
-    padding-bottom: 1px;
+    width: 100vw;
+    padding-top: 85px;
+    padding-bottom: 20px;
 }
 
 .event {
-    height: 25vh; 
+    margin-top: 20px;
+    width: 94vw;
+    min-height: 200px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
     background-color: #2E5584;
-    margin: 15px 20px 15px 20px;
-    border-radius: 15px;
+    border-radius: 5px;
     text-align: center;
     padding-top: 20px;
     border: solid 2px #000000;
     color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #F2F2E9;
+    overflow: hidden;
 }
+
+.eventHalf {
+    float: left;
+    background-color: rgba(255, 0, 0, 0);
+    height: auto;
+    width: 60%;
+    border-radius: 15px 0px 0px 0px;
+
+}
+
+.eventName {
+    width: 90%;
+    margin: 0px 0px 0px 20px;
+    font-size: min(max(5vw, 15px), 30px);
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+    hyphens: auto;
+}
+
+.eventDetails {
+    width: 80%;
+    margin: 5px 0px 20px 20px;
+    font-size: min(max(4vw, 20px), 15px);
+    text-align: left;
+    color: rgb(187, 187, 187);
+}
+
+.eventDescription {
+    border-top: solid 1px rgb(255, 255, 255);
+    padding-top: 20px;
+    width: 98% - 20px;
+    float: left;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: left;
+    font-size: min(max(3vw, 10px), 15px);
+    overflow-wrap: break-word;
+    hyphens: auto;
+    margin-bottom: 20px;
+}
+
+.profileHalf {
+    float: right;
+    background-color: rgba(255, 0, 0, 0);
+    height: 30%;
+    border-radius: 0px 15px 0px 0px;
+    margin-top: -20px;
+    max-width: 30%;
+}
+
+#eventPicture img {
+    float: right;
+    margin-right: 20px;
+    border-radius: 90px;
+    height: min(70px, 20vw);
+    width: min(70px, 20vw);
+    margin-bottom: 10px;
+}
+
+#eventPoster {
+    width: 100%;
+    float: right;
+    margin-right: 20px;
+    margin-top: 20px;
+    text-align: right;
+    font-size: min(max(4vw, 10px), 15px);
+    overflow-wrap: break-word;
+    hyphens: manual;
+    margin-bottom: 5px;
+}
+
 
 #sidePanel {
     z-index: 2;
@@ -84,7 +161,7 @@
     font-size: 30px;
 }
 
-#profilePicture img{
+#profilePicture img {
     display: block;
     margin-left: auto;
     margin-right: auto;

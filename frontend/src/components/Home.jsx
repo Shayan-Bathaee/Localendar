@@ -68,7 +68,26 @@ function Home() {
     }
   };
 
-  
+  const generateEvents = () => {
+    var event = (
+      <div className='event' 
+        style={{backgroundColor: toggle.eventDim}}>
+        <div className='eventHalf'>
+          <div className='eventName'>UCSC Convention For College Students Who Go To Stevenson College</div>
+          <div className='eventDetails'>Santa, Cruz - 9:00pm - 12/11/22</div>
+        </div>
+        <div className='profileHalf'>
+        <div id='eventPoster'>Collegestudent435</div>
+        <div id='eventPicture'><img src = {icon ? icon : ''}/></div>
+        </div>
+        <div className='eventDescription'>
+          This is a random message that was generated for the project, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          This is a random message that was generated for the project, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          This is a random message that was generated for the project, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+       </div>
+      </div>);
+      return [event, event, event, event];
+  }
   
  
     return (
@@ -93,24 +112,7 @@ function Home() {
           </div>
           <div id='eventsContainer' onClick={() => togglePanel('close')}
             style={{backgroundColor: toggle.eventsContainerDim}}>
-            <div className='event' style={
-              {backgroundColor: toggle.eventDim}
-            }></div>
-            <div className='event' style={
-              {backgroundColor: toggle.eventDim}
-            }></div>
-            <div className='event' style={
-              {backgroundColor: toggle.eventDim}
-            }></div>
-            <div className='event' style={
-              {backgroundColor: toggle.eventDim}
-            }></div>
-            <div className='event' style={
-              {backgroundColor: toggle.eventDim}
-            }></div>
-            <div className='event' style={
-              {backgroundColor: toggle.eventDim}
-            }></div>
+          {generateEvents()}
           </div>
         </div>
       </div>
