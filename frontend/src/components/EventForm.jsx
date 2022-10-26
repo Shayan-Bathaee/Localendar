@@ -1,6 +1,7 @@
 import React from "react";
 import "./EventForm.css";
 import { useState } from "react";
+//import {useNavigate} from 'react-router-dom';
 
 function NewEvent() {
   const [inputs, setInputs] = useState({});
@@ -15,6 +16,10 @@ function NewEvent() {
     event.preventDefault();
     console.log(inputs);
   };
+
+  const cancel = () => {
+    history('/');
+  }
 
   return (
     <div>
@@ -32,7 +37,7 @@ function NewEvent() {
               onChange={handleChange}
             />
           </label>
-          <br></br>
+
           <label>
             Date    
             <input
@@ -42,7 +47,6 @@ function NewEvent() {
               onChange={handleChange}
             />
           </label>
-          <br></br>
           <label>
             Time    
             <input
@@ -52,7 +56,6 @@ function NewEvent() {
               onChange={handleChange}
             />
           </label>
-          <br></br>
           <label>
             Location    
             <input
@@ -65,17 +68,17 @@ function NewEvent() {
           <br></br>
           <label>
             Description    
-            <input
+            <textarea
               type="text"
               name="description"
               value={inputs.description || ""}
               onChange={handleChange}
-              size="50"
+              id="description-box"
             />
           </label>
           <br></br>
-          <br></br>
-          <button type="submit">Post</button>
+          <button className="cancel-bttn "type="button" onClick={cancel}>Cancel</button>
+          <button className="post-bttn" type="submit">Post</button>
         </form>
       </div>
     </div>

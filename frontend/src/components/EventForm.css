@@ -7,11 +7,11 @@ body {
     font-size: xx-large;
     color: #32548b;
     text-align: center;
-    margin-top: 50px;
+    margin-top: 40px;
 }
 
 .event-form input, textarea{
-    display: inline-flexbox;
+    display: inline;
     width: 80%;
     padding: .5rem .8rem .5rem .8rem;
     margin: .9vw 0 ;
@@ -20,10 +20,12 @@ body {
     font-size: 20px;
     align-items: stretch;
     margin-left: 40px;
+    vertical-align: auto;
 }
 
 .event-form textarea{
     height: 15vh;
+    font-family: "Verdana";
 }
 
 .event-form label {
@@ -34,11 +36,38 @@ body {
     width: 95%;
     line-height: 26px;
     margin-bottom: 10px;
-    font-size: 20px;
+    font-size: 17px;
     margin-right: 10px;
+    font-family: "Verdana";
+    color: #32548b;
+    font-weight: bold;
   }
 
-#description-box {
-    height: 50px;
-  }
+.event-form #description-box {
+    vertical-align: top;
+    resize: none;
+}
 
+.post-bttn, .cancel-bttn {
+    display: inline-block;
+    width: 10%;
+    height: 2rem;
+    border: 0;
+    bottom: 0;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: "Verdana";
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.post-bttn{ 
+    background-color: #F48E4A;
+}
+
+.cancel-bttn{
+    margin-left: 74.5%;
+    background-color: #D3D3D3;
+}
