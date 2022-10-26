@@ -4,32 +4,30 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 
 
-var event = {
-  eventname: "Steve's birthday party",
-  email: "steve@ucsc.com",
-  eventdate: "2022-12-14",
-  eventtime: "12:00:00",
-  eventlocation: "95060",
-  eventdescription: "fat rager for steve's birthday"
-};
-
-function writeEventToDB() {
+// writes an event to the database
+// event: an object containing:
+  // eventname
+  // email
+  // eventdate ('YYYY-MM-DD')
+  // eventtime ('HH:MM:SS')
+  // eventlocation
+  // eventdescription
+function writeEventToDB(newEvent) {
   /* write event to database */
   fetch('http://localhost:3010/v0/eventform', {
       method: 'POST',
-      body: JSON.stringify(event), // currently, 'event' is the hardcoded event above
+      body: JSON.stringify(newEvent),
       headers: {
         'Content-Type': 'application/json',
       },
     })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (!res.ok) {
           throw res;
         } return res.json();
       })
       .then((json) => {
-        console.log('valid event');
         console.log(json);
       })
       .catch((err) => {
@@ -50,7 +48,19 @@ function NewEvent() {
 
   const handlePost = (event) => {
     event.preventDefault();
-    console.log(inputs);
+    // get user 
+    const user = JSON.parse(localStorage.getItem('user'));
+    // build new event 
+    var newEvent = {
+      eventname: inputs.event_name,
+      email: user.email,
+      eventdate: inputs.date,
+      eventtime: inputs.time,
+      eventlocation: inputs.location,
+      eventdescription: inputs.description
+    }
+    writeEventToDB(newEvent);
+    history('/homepage'); // take user back to homepage when event is done
   };
 
   const history = useNavigate();
@@ -81,6 +91,7 @@ function NewEvent() {
             <input
               type="text"
               name="date"
+              placeholder="YYYY-MM-DD"
               value={inputs.date || ""}
               onChange={handleChange}
             />
@@ -90,6 +101,7 @@ function NewEvent() {
             <input
               type="text"
               name="time"
+              placeholder="HH:MM:SS"
               value={inputs.time || ""}
               onChange={handleChange}
             />
@@ -116,7 +128,7 @@ function NewEvent() {
           </label>
           <br></br>
           <button className="cancel-bttn "type="button" onClick={cancel}>Cancel</button>
-          <button className="post-bttn" type="submit" onClick={writeEventToDB}>Post</button>
+          <button className="post-bttn" type="submit">Post</button>
         </form>
       </div>
     </div>

@@ -24,6 +24,4 @@ exports.post = async (req, res) => {
         res.status(200).json({eventname: eventname, email: email, eventdate: eventdate, eventtime: eventtime, eventlocation: eventlocation, eventdescription: eventdescription});
       }
     );
-  
-    // res.status(200).json({name: name, email: email});
   };

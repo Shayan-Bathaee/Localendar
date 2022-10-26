@@ -29,7 +29,7 @@ exports.post = async (req, res) => {
   const { name, email, pic } = req.body;
 
   pool.query(
-    'INSERT INTO users (email, username, pw) VALUES ($2, $1, $3) ON CONFLICT (email) DO NOTHING RETURNING *',
+    'INSERT INTO users (email, username, pw) VALUES ($1, $2, $3) ON CONFLICT (email) DO NOTHING RETURNING *',
     [email, name, pic],
     (error, results) => {
       if (error) {
@@ -38,7 +38,7 @@ exports.post = async (req, res) => {
 
       
 
-      res.status(200).json({name: name, email: email, pic: pic});
+      res.status(200).json({email: email, name: name, pic: pic});
     }
   );
 
