@@ -9,6 +9,24 @@ const pool = new Pool({
   password: process.env.POSTGRES_PASSWORD,
 });
 
+const getEvents = async () => {
+  const select = 'SELECT * FROM events';
+  const query = {
+    text: select,
+    values: [],
+  };
+  const {rows} = await pool.query(query);
+  //return rows;
+  return JSON.stringify(rows);
+};
+
+exports.get = async (req, res) => {
+  res.status(200).json({message:
+    `all events stored in event database: ` +
+    `${await getEvents()}`
+  });
+};
+
 exports.post = async (req, res) => {
     const {eventname, email, eventdate, eventtime, eventlocation, eventdescription} = req.body;
   

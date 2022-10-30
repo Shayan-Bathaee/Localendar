@@ -29,6 +29,7 @@ app.use(
 
 app.get('/v0/homepage', auth.get);
 app.post('/v0/homepage', auth.post);
+app.get('/v0/eventform', event.get);
 app.post('/v0/eventform', event.post);
 // Your routes go here
 
