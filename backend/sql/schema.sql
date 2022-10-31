@@ -1,7 +1,7 @@
 
 -- user profile table --
 DROP TABLE IF EXISTS users CASCADE;
-CREATE TABLE users(email VARCHAR(255), pw VARCHAR(255), username VARCHAR(255), PRIMARY KEY (email));
+CREATE TABLE users(email VARCHAR(255), pic VARCHAR(255), username VARCHAR(255), PRIMARY KEY (email));
 
 -- event table -- 
 DROP TABLE IF EXISTS events CASCADE;

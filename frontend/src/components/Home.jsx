@@ -94,7 +94,7 @@ function Home() {
           </div>
           <div className='profileHalf'>
             <div id='eventPoster'>{event.email}</div>
-            <div id='eventPicture'><img src={{icon} ? icon : ''} /></div>
+            <div id='eventPicture'><img src={event.profilepic} /></div>
           </div>
           <div className='eventDescription'>
             {event.eventdescription}

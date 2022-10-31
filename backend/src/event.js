@@ -1,5 +1,6 @@
 const db = require('./db');
 const {Pool} = require('pg');
+const fs = require('fs');
 
 const pool = new Pool({
   host: 'localhost',
@@ -20,10 +21,34 @@ const getEvents = async () => {
   return rows;
 };
 
+const selectUser = async (user) => {
+
+  let select = 'SELECT * FROM users';
+  if (user) {
+    select += ` WHERE email ~* $1`;
+  }
+  const query = {
+    text: select,
+    values: user ? [`${user}`] : [],
+  };
+
+  const {rows} = await pool.query(query);
+  return rows[0].pic;
+};
+
+
+
 exports.get = async (req, res) => {
+
+  const u = await getEvents();
+
+  for(let i = 0; i < u.length; i++){
+    u[i].profilepic = await selectUser(u[i].email);
+  }
+
   res.status(200).json({
     message: `all events stored in event database: `, 
-    data: await getEvents()
+    data: u,
   });
 };
 
