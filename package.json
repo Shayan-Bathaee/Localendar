@@ -19,7 +19,9 @@
     "postinstall": "(npm run install-backend) && (npm run install-frontend) && (npm run install-e2e)"
   },
   "dependencies": {
+    "dateformat": "^5.0.3",
     "jwt-decode": "^3.1.2",
+    "moment": "^2.29.4",
     "react-scripts": "^5.0.1"
   }
 }

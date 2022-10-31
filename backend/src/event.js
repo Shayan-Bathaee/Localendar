@@ -17,13 +17,13 @@ const getEvents = async () => {
   };
   const {rows} = await pool.query(query);
   //return rows;
-  return JSON.stringify(rows);
+  return rows;
 };
 
 exports.get = async (req, res) => {
-  res.status(200).json({message:
-    `all events stored in event database: ` +
-    `${await getEvents()}`
+  res.status(200).json({
+    message: `all events stored in event database: `, 
+    data: await getEvents()
   });
 };
 
