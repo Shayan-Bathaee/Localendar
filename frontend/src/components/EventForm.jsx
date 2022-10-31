@@ -61,6 +61,7 @@ function NewEvent() {
     }
     writeEventToDB(newEvent);
     history('/homepage'); // take user back to homepage when event is done
+    history.go(0);
   };
 
   const history = useNavigate();
