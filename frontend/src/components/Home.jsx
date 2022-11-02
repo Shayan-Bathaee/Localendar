@@ -96,6 +96,7 @@ function Home() {
             <div id='eventPoster'>{event.email}</div>
             <div id='eventPicture'><img src={event.profilepic} /></div>
           </div>
+          <div className='eventBorder'></div>
           <div className='eventDescription'>
             {event.eventdescription}
           </div>

@@ -45,8 +45,10 @@
 }
 
 .event {
+    padding-left: 20px;
+    padding-right: 20px;
     margin-top: 20px;
-    width: 94vw;
+    width: 80vw;
     min-height: 200px;
     max-width: 1000px;
     margin-left: auto;
@@ -73,7 +75,7 @@
 
 .eventName {
     width: 90%;
-    margin: 0px 0px 0px 20px;
+    margin: 0px 0px 0px 0px;
     font-size: min(max(5vw, 15px), 30px);
     font-family: Arial, Helvetica, sans-serif;
     text-align: left;
@@ -82,19 +84,22 @@
 
 .eventDetails {
     width: 80%;
-    margin: 5px 0px 20px 20px;
+    margin: 5px 0px 20px 0px;
     font-size: min(max(4vw, 20px), 15px);
     text-align: left;
     color: rgb(187, 187, 187);
 }
 
-.eventDescription {
-    border-top: solid 1px rgb(255, 255, 255);
-    padding-top: 20px;
-    width: 98% - 20px;
+.eventBorder {
     float: left;
-    padding-left: 20px;
-    padding-right: 20px;
+    width: 100%;
+    border-top: solid 1px rgb(255, 255, 255);
+}
+
+.eventDescription {
+    padding-top: 20px;
+    float: right;
+    width: 100%;
     text-align: left;
     font-size: min(max(3vw, 10px), 15px);
     overflow-wrap: break-word;
@@ -113,7 +118,7 @@
 
 #eventPicture img {
     float: right;
-    margin-right: 20px;
+    margin-right: 0px;
     border-radius: 90px;
     height: min(70px, 20vw);
     width: min(70px, 20vw);
@@ -123,7 +128,6 @@
 #eventPoster {
     width: 100%;
     float: right;
-    margin-right: 20px;
     margin-top: 20px;
     text-align: right;
     font-size: min(max(4vw, 10px), 15px);
