@@ -1,6 +1,6 @@
 {
   "name": "cse115",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "description": "cse115",
   "author": "",
   "license": "UNLICENSED",
@@ -15,7 +15,8 @@
     "start-frontend": "cd frontend && npm start",
     "install-e2e": "cd e2e && npm install",
     "start": "(npm run start-backend) & (npm run start-frontend)",
-    "zip": "bestzip Assignment8.Submission.zip e2e/tests/* frontend/src/* backend/sql/* backend/src/* backend/api/*"
+    "zip": "bestzip Assignment8.Submission.zip e2e/tests/* frontend/src/* backend/sql/* backend/src/* backend/api/*",
+    "postinstall": "(npm run install-backend) && (npm run install-frontend) && (npm run install-e2e)"
   },
   "dependencies": {
     "dateformat": "^5.0.3",

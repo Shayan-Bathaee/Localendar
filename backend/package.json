@@ -1,8 +1,8 @@
 {
-  "name": "cse186-assignment8-backend",
-  "version": "2.0.0",
-  "description": "CSE186 Assignment 8 - Backend",
-  "author": "David Harrison <dcharris@ucsc.edu>",
+  "name": "cse115a-backend",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
   "license": "UNLICENSED",
   "repository": "none",
   "devDependencies": {
