@@ -17,6 +17,8 @@ function Home() {
     panelTransform: 'translateX(100%)',
     eventsContainerDim: 'rgb(214, 196, 171)',
     eventDim: '#2E5584',
+    textDim: 'white',
+    detailsDim: 'rgb(187, 187, 187)',
   });
 
   React.useEffect(() => {
@@ -43,12 +45,16 @@ function Home() {
         panelTransform: 'translateX(100%)',
         eventsContainerDim: 'rgb(214, 196, 171)',
         eventDim: '#2E5584',
+        textDim: 'white',
+        detailsDim: 'rgb(187, 187, 187)',
       });
     } else {
       setToggle({
         panelTransform: 'translateX(0%)',
         eventsContainerDim: 'rgb(87, 79, 69)',
         eventDim: '#15263b',
+        textDim: 'rgb(53, 53, 53)',
+        detailsDim: 'rgb(36, 36, 36)',
       });
     }
   };
@@ -85,19 +91,21 @@ function Home() {
         <div className='event'
           style={{ backgroundColor: toggle.eventDim }}>
           <div className='eventHalf'>
-            <div className='eventName'>{event.eventname}</div>
-            <div className='eventDetails'>
-              {event.eventlocation} - &nbsp;
-              {event.eventtime} &nbsp;
+            <div className='eventName' style={{color: toggle.textDim}}>{event.eventname}</div>
+            <div className='eventDetails' style={{color: toggle.detailsDim}}>
+              {event.eventlocation}
+              {' '}
+              {event.eventtime} 
+              {' '}
               {dateFormat(event.eventdate, "dddd, mmm d, yyyy")}
             </div>
           </div>
           <div className='profileHalf'>
-            <div id='eventPoster'>{event.email}</div>
+            <div id='eventPoster' style={{color: toggle.textDim}}>{event.email}</div>
             <div id='eventPicture'><img src={event.profilepic} /></div>
           </div>
-          <div className='eventBorder'></div>
-          <div className='eventDescription'>
+          <div className='eventBorder' style={{borderColor: toggle.textDim}}></div>
+          <div className='eventDescription' style={{color: toggle.textDim}}>
             {event.eventdescription}
           </div>
         </div>
