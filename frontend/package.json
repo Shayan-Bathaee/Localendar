@@ -13,6 +13,7 @@
     "emoji-picker-react": "*",
     "prop-types": "*",
     "react": "*",
+    "react-geocode": "^0.2.3",
     "react-router": "*",
     "react-router-dom": "*"
   },

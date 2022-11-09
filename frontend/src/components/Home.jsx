@@ -3,6 +3,7 @@ import React from 'react';
 import './Home.css';
 import dateFormat from 'dateformat';
 import {json, useNavigate} from 'react-router-dom';
+import Geocode from "react-geocode";
 
 /**
  * @return {object} JSX Table
@@ -58,6 +59,20 @@ function Home() {
       });
     }
   };
+
+  Geocode.setApiKey("AIzaSyAZwTrchd6eBtPRB7m1VOz5Fh5smHba5Us")
+
+  Geocode.fromAddress("1156 High St, Santa Cruz, CA").then(
+    (response) => {
+      console.log(response.results[0]);
+      const latitude = response.results[0].geometry.location.lat;
+      const longitude = response.results[0].geometry.location.lng;
+      console.log("coordinates: ", latitude, longitude)
+    },
+    (error) => {
+      console.error(error);
+    }
+  )
 
   const getEventsFromDB = () => {
     fetch('http://localhost:3010/v0/eventform', {
