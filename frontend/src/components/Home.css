@@ -4,6 +4,15 @@
     width: 100%;
     position: fixed;
     border-bottom: solid 2px #000000;
+    z-index: 3;
+}
+
+#pageDimmer {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 4;
 }
 
 .logo {
@@ -37,10 +46,87 @@
     cursor: pointer;
 }
 
+#locationContainer {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0);
+    width: 95%;
+    height: 42px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1060px;
+}
+
+#setButton {
+    width: 25%;
+    height: 40px;
+    background-color: #d6d6cf;
+    border-radius: 90px 0px 0px 90px;
+    text-align: center;
+    line-height: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: min(max(15px, 2vw), 20px);
+    padding-left: 5px;
+    padding-right: 5px;
+    border: solid 1px rgb(0, 0, 0);
+}
+
+#textPortion {
+    width: 100%;
+    height: 38px;
+    background-color: #F2F2E9;
+    font-size: min(max(15px, 2vw), 20px);
+    border: none;
+    border-radius: 0px 90px 90px 0px;
+    padding-left: 20px;
+    border: solid 1px rgb(0, 0, 0);
+}
+
+#setButton:hover {
+    background-color: #2E5584;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+#resultsContainer {
+    border-radius: 25px;
+    background-color: #F2F2E9;
+    width: 95%;
+    max-height: 152px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1060px;
+    margin-top: 2px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border: solid 1px rgb(0, 0, 0);
+}
+
+#resultContainerSmall {
+    width: 100%;
+}
+
+#result {
+    color: gray;
+    width: 100%;
+    height: 38px;
+    background-color: #f2f2e900;
+    font-size: min(max(15px, 2vw), 20px);
+    line-height: 38px;
+    padding-left: 20px;
+}
+
+#result:hover {
+    background-color: #d4d4cc70;
+    cursor: pointer;
+    color:rgb(0, 0, 0);
+}
+
 #eventsContainer {
+    background-color: rgb(214, 196, 171);
     height: 100%;
     width: 100vw;
-    padding-top: 85px;
+    padding-top: 105px;
     padding-bottom: 20px;
 }
 
@@ -138,7 +224,7 @@
 
 
 #sidePanel {
-    z-index: 2;
+    z-index: 5;
     height: 100vh;
     width: 80%;
     max-width: 300px;
