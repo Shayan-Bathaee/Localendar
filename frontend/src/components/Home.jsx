@@ -51,9 +51,10 @@ function Home() {
 
   //1156 High St, Santa Cruz, CA
   const inputAddress = (addy) => {
-    if (address == "") {return;}
+    if (address == "" && addy == "") {return;}
     else {
       setResultsHidden('none');
+      setAddress(addy);
       console.log(addy);
       Geocode.fromAddress(addy).then(
         (response) => {
