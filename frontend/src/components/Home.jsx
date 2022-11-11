@@ -50,11 +50,12 @@ function Home() {
   Geocode.setApiKey("AIzaSyAZwTrchd6eBtPRB7m1VOz5Fh5smHba5Us");
 
   //1156 High St, Santa Cruz, CA
-  const inputAddress = () => {
+  const inputAddress = (addy) => {
     if (address == "") {return;}
     else {
-      setResultsHidden('none')
-      Geocode.fromAddress(address).then(
+      setResultsHidden('none');
+      console.log(addy);
+      Geocode.fromAddress(addy).then(
         (response) => {
           console.log(response.results[0]);
           const latitude = response.results[0].geometry.location.lat;
@@ -74,15 +75,9 @@ function Home() {
     setResultsHidden('block');
   };
 
-  const resultClick = () => {
-    setAddress('1156 High St, Santa Cruz, CA'); 
-    setResultsHidden('none');
-    inputAddress();
-  };
-
   const handleKeyPress = (event) => {
     if (event.key == 'Enter') {
-      inputAddress();
+      inputAddress(address);
     };
   };
 
@@ -110,7 +105,7 @@ function Home() {
     const resultsList = lst.map((lst) => {
       return (
         <div id='resultContainerSmall'>
-          <div id='result' onClick={()=>{resultClick()}}>
+          <div id='result' onClick={()=>{inputAddress('1156 High St, Santa Cruz, CA')}}>
             {'1156 High St, Santa Cruz, CA'}
           </div>
         </div>
@@ -181,7 +176,7 @@ function Home() {
         style={{'display': dim}}></div>
         <div id='eventsContainer'>
           <div id='locationContainer'>
-            <div id='setButton' onClick={()=>inputAddress()}>Search</div>
+            <div id='setButton' onClick={()=>inputAddress(address)}>Search</div>
             <input
               type="text"
               name="event_name"
