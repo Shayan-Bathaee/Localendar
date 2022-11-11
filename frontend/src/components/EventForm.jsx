@@ -2,6 +2,11 @@ import React from "react";
 import "./EventForm.css";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng
+} from "react-places-autocomplete";
+
 
 
 // writes an event to the database
@@ -40,6 +45,20 @@ function writeEventToDB(newEvent) {
 function NewEvent() {
   const [inputs, setInputs] = useState({});
 
+  const [address, setAddress] = React.useState("");
+  const [coordinates, setCoordinates] = React.useState({
+    lat: null,
+    lng: null
+  });
+
+  const handleSelect = async value => {
+    const results = await geocodeByAddress(value);
+    const latLng = await getLatLng(results[0]);
+    setAddress(value);
+    setCoordinates(latLng);
+  };
+
+
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -56,12 +75,12 @@ function NewEvent() {
       email: user.email,
       eventdate: inputs.date,
       eventtime: inputs.time,
-      eventlocation: inputs.location,
+      eventlocation: address,
       eventdescription: inputs.description
     }
     writeEventToDB(newEvent);
     history('/homepage'); // take user back to homepage when event is done
-    history.go(0);
+    //history.go(0);
   };
 
   const history = useNavigate();
@@ -107,14 +126,39 @@ function NewEvent() {
               onChange={handleChange}
             />
           </label>
-          <label>
-            Location    
-            <input
-              type="text"
-              name="location"
-              value={inputs.location || ""}
-              onChange={handleChange}
-            />
+          <label>    
+         
+              <PlacesAutocomplete
+                value={address}
+                onChange={setAddress}
+                onSelect={handleSelect}
+              >
+                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                  <div>
+                    Location
+                    <p>Latitude: {coordinates.lat}</p>
+                    <p>Longitude: {coordinates.lng}</p>
+                    <input type="text" name="location "{...getInputProps({ placeholder: "Type address" })} />
+
+                    <div>
+                      {loading ? <div>...loading</div> : null}
+
+                      {suggestions.map(suggestion => {
+                        const style = {
+                          backgroundColor: suggestion.active ? "#ff8a5c" : "#fff"
+                        };
+
+                        return (
+                          <div {...getSuggestionItemProps(suggestion, { style })}>
+                            {suggestion.description}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </PlacesAutocomplete>
+            
           </label>
           <br></br>
           <label>

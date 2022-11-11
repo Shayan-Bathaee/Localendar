@@ -6,6 +6,7 @@
   "license": "UNLICENSED",
   "repository": "none",
   "devDependencies": {
+    "@types/google.maps": "^3.50.5",
     "bestzip": "*"
   },
   "scripts": {
@@ -22,6 +23,8 @@
     "dateformat": "^5.0.3",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",
-    "react-scripts": "^5.0.1"
+    "react-places-autocomplete": "^7.3.0",
+    "react-scripts": "^5.0.1",
+    "use-places-autocomplete": "^4.0.0"
   }
 }
