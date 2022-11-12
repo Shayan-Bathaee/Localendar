@@ -11,7 +11,8 @@ CREATE TABLE events(
     eventdate DATE, -- YYYY-MM-DD
     eventtime TIME, -- hh:mm:ss
     eventlocation VARCHAR(255), -- zip code for now, but may change later
-    eventcoords FLOAT[], -- latitude, longitude 
+    latitude FLOAT,
+    longitude FLOAT,
     eventdescription VARCHAR(2000), -- allow for a long description
     FOREIGN KEY (email) REFERENCES users(email)
 );

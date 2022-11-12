@@ -139,6 +139,10 @@ components:
           type: string
         eventlocation:
           type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
         eventdescription:
           type: string
       required:
@@ -146,4 +150,6 @@ components:
         - email
         - eventdate
         - eventtime
+        - latitude
+        - longitude
         - eventlocation

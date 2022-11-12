@@ -53,18 +53,26 @@ exports.get = async (req, res) => {
 };
 
 exports.post = async (req, res) => {
-    const {eventname, email, eventdate, eventtime, eventlocation, eventcoords, eventdescription} = req.body;
+    const {eventname, email, eventdate, eventtime, eventlocation, latitude, longitude, eventdescription} = req.body;
   
     pool.query(
-      'INSERT INTO events (eventname, email, eventdate, eventtime, eventlocation, eventcoords, eventdescription) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
-      [eventname, email, eventdate, eventtime, eventlocation, eventcoords, eventdescription],
+      'INSERT INTO events (eventname, email, eventdate, eventtime, eventlocation, latitude, longitude, eventdescription) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
+      [eventname, email, eventdate, eventtime, eventlocation, latitude, longitude, eventdescription],
       (error, results) => {
         if (error) {
           throw error;
         }
   
         
-        res.status(200).json({eventname: eventname, email: email, eventdate: eventdate, eventtime: eventtime, eventlocation: eventlocation, eventcoords: eventcoords, eventdescription: eventdescription});
+        res.status(200).json({
+          eventname: eventname, 
+          email: email, 
+          eventdate: eventdate, 
+          eventtime: eventtime, 
+          eventlocation: eventlocation, 
+          latitude: latitude, 
+          longitude: longitude,
+          eventdescription: eventdescription});
       }
     );
   };

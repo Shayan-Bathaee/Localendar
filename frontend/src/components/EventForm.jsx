@@ -76,6 +76,8 @@ function NewEvent() {
       eventdate: inputs.date,
       eventtime: inputs.time,
       eventlocation: address,
+      latitude: coordinates.lat,
+      longitude: coordinates.lng,
       eventdescription: inputs.description
     }
     writeEventToDB(newEvent);
