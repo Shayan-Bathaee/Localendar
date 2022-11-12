@@ -4,6 +4,10 @@ import './Home.css';
 import dateFormat from 'dateformat';
 import {json, useNavigate} from 'react-router-dom';
 import Geocode from "react-geocode";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng
+} from "react-places-autocomplete";
 
 /**
  * @return {object} JSX Table
@@ -14,7 +18,6 @@ function Home() {
   const [name, setName] = React.useState(user ? user.name : '');
   const [icon, setPic] = React.useState(user ? user.pic : '');
   const [address, setAddress] = React.useState("");
-  const [resultsHidden, setResultsHidden] = React.useState('none')
   const [error, setError] = React.useState('Logged Out');
   const [dim, setDim] = React.useState('none');
   const [transformer, setTransform] = React.useState('translateX(100%)');
@@ -50,37 +53,24 @@ function Home() {
   Geocode.setApiKey("AIzaSyAZwTrchd6eBtPRB7m1VOz5Fh5smHba5Us");
 
   //1156 High St, Santa Cruz, CA
-  const inputAddress = (addy) => {
-    if (address == "" && addy == "") {return;}
-    else {
-      setResultsHidden('none');
-      setAddress(addy);
-      console.log(addy);
-      Geocode.fromAddress(addy).then(
-        (response) => {
-          console.log(response.results[0]);
-          const latitude = response.results[0].geometry.location.lat;
-          const longitude = response.results[0].geometry.location.lng;
-          // THIS IS WHERE API CALL WILL BE WITH COORDINATES
-          console.log("coordinates: ", latitude, longitude)
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
-    }
-  }
-
-  const handleChange = (event) => {
-    setAddress(event.target.value);
-    setResultsHidden('block');
-  };
-
-  const handleKeyPress = (event) => {
-    if (event.key == 'Enter') {
-      inputAddress(address);
-    };
-  };
+  // const inputAddress = (addy) => {
+  //   if (address1 == "" && addy == "") {return;}
+  //   else {
+  //     setResultsHidden('none');
+  //     console.log(addy);
+  //     Geocode.fromAddress(addy).then(
+  //       (response) => {
+  //         console.log(response.results[0]);
+  //         const latitude = response.results[0].geometry.location.lat;
+  //         const longitude = response.results[0].geometry.location.lng;
+  //         console.log("coordinates: ", latitude, longitude)
+  //       },
+  //       (error) => {
+  //         console.error(error);
+  //       }
+  //     );
+  //   }
+  // }
 
   const getEventsFromDB = () => {
     fetch('http://localhost:3010/v0/eventform', {
@@ -102,21 +92,12 @@ function Home() {
       });
   }
 
-  const generateResults = (lst) => {
-    const resultsList = lst.map((lst) => {
-      return (
-        <div id='resultContainerSmall'>
-          <div id='result' onClick={()=>{inputAddress('1156 High St, Santa Cruz, CA')}}>
-            {'1156 High St, Santa Cruz, CA'}
-          </div>
-        </div>
-      )
-    });
-    return (
-      <div id='resultsContainer' style={{'display': resultsHidden}}>
-        {resultsList}
-      </div>
-      );
+  const handleSelect = async value => {
+    const results = await geocodeByAddress(value);
+    const latLng = await getLatLng(results[0]);
+    setAddress(value);
+    console.log(latLng);
+    // Use this latitude and longitude to retrieve data from database
   };
 
   /**
@@ -176,18 +157,32 @@ function Home() {
         <div id='pageDimmer' onClick={()=>togglePanel('close')}
         style={{'display': dim}}></div>
         <div id='eventsContainer'>
-          <div id='locationContainer'>
-            <div id='setButton' onClick={()=>inputAddress(address)}>Search</div>
-            <input
-              type="text"
-              name="event_name"
-              value={address}
-              onChange={handleChange}
-              onKeyDown={handleKeyPress}
-              placeholder='Enter Address'
-            id='textPortion'></input>
-          </div> 
-          {generateResults([1, 2, 3, 4, 5])}
+          <PlacesAutocomplete
+            value={address}
+            onChange={setAddress}
+            onSelect={handleSelect}>
+            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+              <div>
+                <div id='locationContainer'>
+                  <div id='setButton' onClick={()=>handleSelect(address)}>Search</div>
+                  <input id= 'textPortion' type="text" name="location "{...getInputProps({ placeholder: "Enter address" })} />
+                  </div>
+                  <div id='resultsContainer'>
+                  {suggestions.map(suggestion => {
+                    return (
+                      <div id='resultsContainerSmall'>
+                        <div id='result'>
+                          <div {...getSuggestionItemProps(suggestion)}>
+                            {suggestion.description}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              )}
+          </PlacesAutocomplete>
           {generateEvents(events)}
         </div>
       </div>
