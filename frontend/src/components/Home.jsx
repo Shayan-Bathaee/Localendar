@@ -9,6 +9,11 @@ import PlacesAutocomplete, {
   getLatLng
 } from "react-places-autocomplete";
 
+let globalCoordinates = {
+  lat: 0,
+  lng: 0
+};
+
 /**
  * @return {object} JSX Table
  */
@@ -52,26 +57,6 @@ function Home() {
 
   Geocode.setApiKey("AIzaSyAZwTrchd6eBtPRB7m1VOz5Fh5smHba5Us");
 
-  //1156 High St, Santa Cruz, CA
-  // const inputAddress = (addy) => {
-  //   if (address1 == "" && addy == "") {return;}
-  //   else {
-  //     setResultsHidden('none');
-  //     console.log(addy);
-  //     Geocode.fromAddress(addy).then(
-  //       (response) => {
-  //         console.log(response.results[0]);
-  //         const latitude = response.results[0].geometry.location.lat;
-  //         const longitude = response.results[0].geometry.location.lng;
-  //         console.log("coordinates: ", latitude, longitude)
-  //       },
-  //       (error) => {
-  //         console.error(error);
-  //       }
-  //     );
-  //   }
-  // }
-
   const getEventsFromDB = () => {
     fetch('http://localhost:3010/v0/eventform', {
       method: 'GET'
@@ -92,11 +77,14 @@ function Home() {
       });
   }
 
+  /* this function gets called when the 'search' button is pressed */
   const handleSelect = async value => {
     const results = await geocodeByAddress(value);
     const latLng = await getLatLng(results[0]);
     setAddress(value);
-    console.log(latLng);
+    globalCoordinates.lat = latLng.lat;
+    globalCoordinates.lng = latLng.lng;
+    console.log("globalCoordinats", globalCoordinates);
     // Use this latitude and longitude to retrieve data from database
   };
 
@@ -114,7 +102,7 @@ function Home() {
             <div className='eventName'>{event.eventname}</div>
             <div className='eventDetails'>
               {event.eventlocation}
-              {' '}
+              <br></br>
               {event.eventtime} 
               {' '}
               {dateFormat(event.eventdate, "dddd, mmm d, yyyy")}
