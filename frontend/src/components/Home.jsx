@@ -8,11 +8,24 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng
 } from "react-places-autocomplete";
+import { useEffect } from 'react';
 
 let globalCoordinates = {
   lat: 0,
   lng: 0
 };
+
+/**
+ * @return {*} distance between the user and the event
+ * @param {*} userLatitude
+ * @param {*} userLongitude
+ * @param {*} eventLatitude
+ * @param {*} eventLongitude 
+ */
+
+// function calculateDistanceInMiles(userLatitude, userLongitude, eventLatitude, eventLongitude) {
+
+// }
 
 /**
  * @return {object} JSX Table
@@ -85,8 +98,26 @@ function Home() {
     globalCoordinates.lat = latLng.lat;
     globalCoordinates.lng = latLng.lng;
     console.log("globalCoordinats", globalCoordinates);
-    // Use this latitude and longitude to retrieve data from database
+
+    // calculate distance and add the attribute to the event object
+    // temporary: sort the events in reverse order
+    console.log("sorting");
+    let eventsSortingCopy = [...events];
+    for (let i = 0; i < eventsSortingCopy.length; i++) {
+      eventsSortingCopy[i].distance = eventsSortingCopy.length - i;
+    }
+    eventsSortingCopy.sort((a, b) => {
+      return a.distance - b.distance;
+    });
+
+    // set the events now that they are sorted
+    setEvents(eventsSortingCopy);
+
+    // refresh the events
+    console.log('generating events');
+
   };
+  
 
   /**
    * Generate formatted output of events
