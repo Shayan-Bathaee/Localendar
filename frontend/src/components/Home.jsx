@@ -15,6 +15,9 @@ let globalCoordinates = {
   lng: 0
 };
 
+let radiusOfEarthInMiles = 3963;
+
+
 /**
  * @return {*} distance between the user and the event
  * @param {*} userLatitude
@@ -23,9 +26,14 @@ let globalCoordinates = {
  * @param {*} eventLongitude 
  */
 
-// function calculateDistanceInMiles(userLatitude, userLongitude, eventLatitude, eventLongitude) {
-
-// }
+function calculateDistanceInMiles(userLatitude, userLongitude, eventLatitude, eventLongitude) {
+  let userLatitudeRadians = userLatitude / 57.29577951;
+  let userLongitudeRadians = userLongitude / 57.29577951;
+  let eventLatitudeRadians = eventLatitude / 57.29577951;
+  let eventLongitudeRadians = eventLongitude / 57.29577951;
+  let distance = radiusOfEarthInMiles * Math.acos((Math.sin(userLatitudeRadians) * Math.sin(eventLatitudeRadians)) + (Math.cos(userLatitudeRadians) * Math.cos(eventLatitudeRadians) * Math.cos(eventLatitudeRadians - userLatitudeRadians)));
+  return distance;
+}
 
 /**
  * @return {object} JSX Table
@@ -97,24 +105,20 @@ function Home() {
     setAddress(value);
     globalCoordinates.lat = latLng.lat;
     globalCoordinates.lng = latLng.lng;
-    console.log("globalCoordinats", globalCoordinates);
 
-    // calculate distance and add the attribute to the event object
-    // temporary: sort the events in reverse order
-    console.log("sorting");
+    // for each event, calculate distance and add it as an event property
     let eventsSortingCopy = [...events];
     for (let i = 0; i < eventsSortingCopy.length; i++) {
-      eventsSortingCopy[i].distance = eventsSortingCopy.length - i;
+      eventsSortingCopy[i].distance = calculateDistanceInMiles(globalCoordinates.lat, globalCoordinates.lng, eventsSortingCopy[i].latitude, eventsSortingCopy[i].longitude);
     }
+    
+    // sort the events based on their distance property
     eventsSortingCopy.sort((a, b) => {
       return a.distance - b.distance;
     });
 
     // set the events now that they are sorted
     setEvents(eventsSortingCopy);
-
-    // refresh the events
-    console.log('generating events');
 
   };
   
@@ -125,7 +129,6 @@ function Home() {
    * @returns 
    */
   const generateEvents = (events) => {
-    console.log("Events", events)
     const eventsList = events.map((event) => {
       return (
         <div className='event'>
