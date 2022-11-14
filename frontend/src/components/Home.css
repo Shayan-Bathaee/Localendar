@@ -116,6 +116,10 @@
     padding-left: 20px;
 }
 
+#result::-webkit-scrollbar {
+    display: none;
+}
+
 #result:hover {
     background-color: #d4d4cc70;
     cursor: pointer;
