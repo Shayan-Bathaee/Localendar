@@ -31,7 +31,7 @@ function calculateDistanceInMiles(userLatitude, userLongitude, eventLatitude, ev
   let userLongitudeRadians = userLongitude / 57.29577951;
   let eventLatitudeRadians = eventLatitude / 57.29577951;
   let eventLongitudeRadians = eventLongitude / 57.29577951;
-  let distance = radiusOfEarthInMiles * Math.acos((Math.sin(userLatitudeRadians) * Math.sin(eventLatitudeRadians)) + (Math.cos(userLatitudeRadians) * Math.cos(eventLatitudeRadians) * Math.cos(eventLatitudeRadians - userLatitudeRadians)));
+  let distance = radiusOfEarthInMiles * Math.acos((Math.sin(userLatitudeRadians) * Math.sin(eventLatitudeRadians)) + (Math.cos(userLatitudeRadians) * Math.cos(eventLatitudeRadians) * Math.cos(eventLongitudeRadians - userLongitudeRadians)));
   return distance;
 }
 
