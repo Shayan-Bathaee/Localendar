@@ -130,12 +130,16 @@ function Home() {
    */
   const generateEvents = (events) => {
     const eventsList = events.map((event) => {
+      let distanceRender = "";
+      if ('distance' in event) {
+        distanceRender = " (" + Math.round(event.distance * 10) / 10 + " mi)";
+      }
       return (
         <div className='event'>
           <div className='eventHalf'>
             <div className='eventName'>{event.eventname}</div>
             <div className='eventDetails'>
-              {event.eventlocation}
+              {event.eventlocation}{distanceRender}
               <br></br>
               {event.eventtime} 
               {' '}
