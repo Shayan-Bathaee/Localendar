@@ -130,7 +130,41 @@ function Home() {
   };
 
   const handleSortByDate = async value => {
-    console.log("hello! I'm working");
+    // get all events from database
+    getEventsFromDB;
+
+    // get today's date without the time as an integer
+    let todaysDate = new Date();
+    todaysDate.setHours(0, 0, 0, 0);
+    let todaysDateInteger = todaysDate.getTime();
+
+
+    let eventsSortingCopy = [...events];
+    for (let i = 0; i < eventsSortingCopy.length; i++) {
+      let time = eventsSortingCopy[i].eventtime; // get time as a string
+      let dateString = eventsSortingCopy[i].eventdate; // get date as a string
+      
+      // get hours, minutes, and seconds
+      let eventHours = time.slice(0,2);
+      let eventMinutes = time.slice(3, 5);
+      let eventSeconds = time.slice(6);
+      
+      // typcast the string into a date, and update the hours, minutes, and seconds
+      let date = new Date(dateString);
+      date.setHours(parseInt(eventHours), parseInt(eventMinutes), parseInt(eventSeconds));
+      
+      // put the integer version of the date into the event
+      eventsSortingCopy[i].dateInteger = date.getTime();
+      
+    }
+
+    eventsSortingCopy.sort((a, b) => {
+      return a.dateInteger - b.dateInteger;
+    });
+
+    // set the events now that they are sorted
+    setEvents(eventsSortingCopy);
+
   };
   
 
