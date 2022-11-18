@@ -25,7 +25,6 @@ let radiusOfEarthInMiles = 3963;
  * @param {*} eventLatitude
  * @param {*} eventLongitude 
  */
-
 function calculateDistanceInMiles(userLatitude, userLongitude, eventLatitude, eventLongitude) {
   let userLatitudeRadians = userLatitude / 57.29577951;
   let userLongitudeRadians = userLongitude / 57.29577951;
@@ -111,6 +110,9 @@ function Home() {
     globalCoordinates.lat = latLng.lat;
     globalCoordinates.lng = latLng.lng;
 
+    // get the events from the database
+    getEventsFromDB;
+
     // for each event, calculate distance and add it as an event property
     let eventsSortingCopy = [...events];
     for (let i = 0; i < eventsSortingCopy.length; i++) {
@@ -125,6 +127,10 @@ function Home() {
     // set the events now that they are sorted
     setEvents(eventsSortingCopy);
 
+  };
+
+  const handleSortByDate = async value => {
+    console.log("hello! I'm working");
   };
   
 
@@ -215,6 +221,9 @@ function Home() {
               </div>
               )}
           </PlacesAutocomplete>
+          <div id='optionsContainer'>
+            <button id='sortByDateButton' onClick={handleSortByDate}>Sort By Date</button>
+          </div>
           {generateEvents(events)}
         </div>
       </div>
