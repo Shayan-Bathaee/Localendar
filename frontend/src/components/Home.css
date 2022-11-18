@@ -207,6 +207,19 @@
     max-width: 30%;
 }
 
+.deleteEvent {
+    float: right; 
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    font-family: "Verdana";
+    cursor: pointer;
+    border: 0;
+    width: 10%;
+    height: 1.5rem;
+}
+
 #eventPicture img {
     float: right;
     margin-right: 0px;

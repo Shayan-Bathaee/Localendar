@@ -65,6 +65,11 @@ function Home() {
   const createEvent = () => {
     history('/eventform');
   }
+
+  const deleteEvent = () => {
+    console.log("delete button clicked");
+    console.log("user: ", user);
+  };
   
   const togglePanel = (action) => {
     if (action === 'close') {
@@ -154,6 +159,7 @@ function Home() {
           <div className='eventDescription'>
             {event.eventdescription}
           </div>
+          {user.email == event.email && <button className="deleteEvent" onClick={deleteEvent}>Delete</button>}
         </div>
       )
     });
