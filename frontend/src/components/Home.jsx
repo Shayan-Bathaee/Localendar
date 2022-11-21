@@ -56,10 +56,20 @@ function returnDateInt(event) {
 }
 
 /**
+ * check if every element in an array is undefined
+ * @param {*} array 
+ * @returns 
+ */
+function allElementsAreUndefined(array) {
+  return array.every(element => element === undefined);
+}
+
+/**
  * @return {object} JSX Table
  */
 function Home() {
   const user = JSON.parse(localStorage.getItem('user'));
+  const [radius, setRadius] = React.useState('any');
   const [events, setEvents] = React.useState([]);
   const [name, setName] = React.useState(user ? user.name : '');
   const [icon, setPic] = React.useState(user ? user.pic : '');
@@ -138,11 +148,22 @@ function Home() {
     globalCoordinates.lat = latLng.lat;
     globalCoordinates.lng = latLng.lng;
 
-    // for each event, calculate distance and add it as an event property
+    // for each event, calculate distance and add it as an event property, then figure out if they are in radius
     let eventsSortingCopy = [...events];
     for (let i = 0; i < eventsSortingCopy.length; i++) {
       eventsSortingCopy[i].distance = calculateDistanceInMiles(globalCoordinates.lat, globalCoordinates.lng, eventsSortingCopy[i].latitude, eventsSortingCopy[i].longitude);
+      if (radius == 'any') {
+        eventsSortingCopy[i].inRadius = true;
+      }
+      else if (eventsSortingCopy[i].distance <= parseInt(radius)) { // if distance is in the radius, display
+        eventsSortingCopy[i].inRadius = true;
+      }
+      else { // not in radius
+        eventsSortingCopy[i].inRadius = false;
+      }
     }
+
+    console.log('radius: ', radius);
     
     // sort the events based on their distance property
     eventsSortingCopy.sort((a, b) => {
@@ -191,6 +212,37 @@ function Home() {
     }
     setEvents(eventsCopy); // trigger screen reset
   }
+
+  const handleRadiusChange = (e) => {
+    let eventsCopy = [...events];
+    let eventsCopyLength = eventsCopy.length;
+    console.log('handling change');
+    
+    if (e.target.value == 'any') {
+      for (let i = 0; i < eventsCopyLength; i++) { // display all when radius is any
+        eventsCopy[i].inRadius = true;
+      }
+    }
+    else {
+      let newRadius = parseInt(e.target.value);
+      for (let i = 0; i < eventsCopyLength; i++) {
+        if ('distance' in eventsCopy[i]) {
+          if (eventsCopy[i].distance > newRadius) { // if the distance is outside of the radius, don't display it
+            eventsCopy[i].inRadius = false;
+          }
+          else {
+            eventsCopy[i].inRadius = true;
+          }
+        }
+        else { // if the event doesn't have a distance, just keep it displayed
+          eventsCopy[i].inRadius = true;
+        }
+      }
+    }
+
+    setRadius(e.target.value);
+    setEvents(eventsCopy);
+  }
   
 
   /**
@@ -217,7 +269,7 @@ function Home() {
 
     const eventsList = events.map((event) => {
 
-      if (event.view == false) { // if we don't want to view the event, just return it
+      if ((event.view == false) || (event.inRadius == false)) { // if we don't want to view the event, just return
         return;
       }
 
@@ -249,6 +301,13 @@ function Home() {
         </div>
       )
     });
+    if (allElementsAreUndefined(eventsList)) {
+      return (
+        <div id='failedSearchContainer'>
+          <div id='failedSearch'>Your search returned no results.</div>
+        </div>
+      )
+    }
     return eventsList;
   }
 
@@ -310,6 +369,21 @@ function Home() {
                   <input type="checkbox" onChange={handleShowPastEvents}/>
                   <span class="slider round"></span>
                 </label>
+              </button>
+            </div>
+            <div id='radiusContainter'>
+              <button id='radiusButton' class='optionsButton'>
+                Search Radius &nbsp;
+                <select name='radiusSelect' id='radiusSelect' class='dropdownSelect' onChange={handleRadiusChange}>
+                  <option value='any'>Any</option> 
+                  <option value="5">5 mi</option>
+                  <option value="10">10 mi</option>
+                  <option value="25">25 mi</option>
+                  <option value="50">50 mi</option>
+                  <option value="100">100 mi</option>
+                  <option value="250">250 mi</option>
+                  <option value="300">300 mi</option>
+                </select>
               </button>
             </div>
           </div>
