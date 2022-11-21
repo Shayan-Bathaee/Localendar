@@ -14,8 +14,12 @@ let globalCoordinates = {
   lat: 0,
   lng: 0
 };
-
 let radiusOfEarthInMiles = 3963;
+let showPastEvents = false;
+
+let todaysDate = new Date();
+todaysDate.setHours(0, 0, 0, 0);
+let todaysDateInteger = todaysDate.getTime();
 
 
 /**
@@ -34,6 +38,23 @@ function calculateDistanceInMiles(userLatitude, userLongitude, eventLatitude, ev
   return distance;
 }
 
+function returnDateInt(event) {
+  let time = event.eventtime; // get time as a string
+  let dateString = event.eventdate; // get date as a string
+  
+  // get hours, minutes, and seconds
+  let eventHours = time.slice(0,2);
+  let eventMinutes = time.slice(3, 5);
+  let eventSeconds = time.slice(6);
+  
+  // typcast the string into a date, and update the hours, minutes, and seconds
+  let date = new Date(dateString);
+  date.setHours(parseInt(eventHours), parseInt(eventMinutes), parseInt(eventSeconds));
+  
+  // return the integer version of the date
+  return date.getTime();
+}
+
 /**
  * @return {object} JSX Table
  */
@@ -49,6 +70,7 @@ function Home() {
 
   React.useEffect(() => {
     getEventsFromDB();
+    showPastEvents = false;
   }, []);
 
   const history = useNavigate();
@@ -110,9 +132,6 @@ function Home() {
     globalCoordinates.lat = latLng.lat;
     globalCoordinates.lng = latLng.lng;
 
-    // get the events from the database
-    getEventsFromDB;
-
     // for each event, calculate distance and add it as an event property
     let eventsSortingCopy = [...events];
     for (let i = 0; i < eventsSortingCopy.length; i++) {
@@ -129,43 +148,43 @@ function Home() {
 
   };
 
-  const handleSortByDate = async value => {
-    // get all events from database
-    getEventsFromDB;
-
-    // get today's date without the time as an integer
-    let todaysDate = new Date();
-    todaysDate.setHours(0, 0, 0, 0);
-    let todaysDateInteger = todaysDate.getTime();
-
+  const handleSortByDate = () => {
 
     let eventsSortingCopy = [...events];
     for (let i = 0; i < eventsSortingCopy.length; i++) {
-      let time = eventsSortingCopy[i].eventtime; // get time as a string
-      let dateString = eventsSortingCopy[i].eventdate; // get date as a string
-      
-      // get hours, minutes, and seconds
-      let eventHours = time.slice(0,2);
-      let eventMinutes = time.slice(3, 5);
-      let eventSeconds = time.slice(6);
-      
-      // typcast the string into a date, and update the hours, minutes, and seconds
-      let date = new Date(dateString);
-      date.setHours(parseInt(eventHours), parseInt(eventMinutes), parseInt(eventSeconds));
-      
-      // put the integer version of the date into the event
-      eventsSortingCopy[i].dateInteger = date.getTime();
-      
+      eventsSortingCopy[i].dateInteger = returnDateInt(eventsSortingCopy[i]);
     }
 
     eventsSortingCopy.sort((a, b) => {
       return a.dateInteger - b.dateInteger;
     });
 
+
     // set the events now that they are sorted
     setEvents(eventsSortingCopy);
 
   };
+
+  /* changes the viewing state of events when the show past events toggle is pressed */
+  const handleShowPastEvents = () => {
+    showPastEvents = !showPastEvents;
+    let eventsCopy = [...events];
+    let eventsCopyLength = eventsCopy.length;
+    for (let i = 0; i < eventsCopyLength; i++) {
+      if (showPastEvents) {
+        eventsCopy[i].view = true;
+      }
+      else {
+        if (returnDateInt(events[i]) < todaysDateInteger) {
+          eventsCopy[i].view = false;
+        }
+        else {
+          eventsCopy[i].view = true;
+        }
+      }
+    }
+    setEvents(eventsCopy); // trigger screen reset
+  }
   
 
   /**
@@ -173,8 +192,29 @@ function Home() {
    * @param {*} events 
    * @returns 
    */
+
   const generateEvents = (events) => {
+    for (let i = 0; i < events.length; i++) {
+      if (showPastEvents) {
+        events[i].view = true;
+      }
+      else {
+        if (returnDateInt(events[i]) < todaysDateInteger) {
+          events[i].view = false;
+        }
+        else {
+          events[i].view = true;
+        }
+      }
+    }
+
+
     const eventsList = events.map((event) => {
+
+      if (event.view == false) { // if we don't want to view the event, just return it
+        return;
+      }
+
       let distanceRender = "";
       if ('distance' in event) {
         distanceRender = " (" + Math.round(event.distance * 10) / 10 + " mi)";
@@ -256,7 +296,16 @@ function Home() {
               )}
           </PlacesAutocomplete>
           <div id='optionsContainer'>
-            <button id='sortByDateButton' onClick={handleSortByDate}>Sort By Date</button>
+            <button id='sortByDateButton' class='optionsButton' onClick={handleSortByDate}>Sort By Date</button>
+            <div id='showPastEventsContainer'>
+              <button id='showPastEventsButton' class='optionsButton'>
+                Show Past Events &nbsp;
+                <label class="switch">
+                  <input type="checkbox" onChange={handleShowPastEvents}/>
+                  <span class="slider round"></span>
+                </label>
+              </button>
+            </div>
           </div>
           {generateEvents(events)}
         </div>
