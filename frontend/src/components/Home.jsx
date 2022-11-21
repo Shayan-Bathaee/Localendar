@@ -116,6 +116,12 @@ function Home() {
       })
       .then((json) => {
         console.log(json.data);
+        for (let i = 0; i < json.data.length; i++) {
+          json.data[i].dateInteger = returnDateInt(json.data[i]);
+        }
+        json.data.sort((a, b) => {
+          return a.dateInteger - b.dateInteger;
+        });
         setEvents(json.data);
       })
       .catch((err) => {
