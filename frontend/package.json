@@ -4,6 +4,10 @@
   "description": "Frontend",
   "author": "",
   "license": "UNLICENSED",
+  "engines":{
+    "node": "v16.15.1",
+    "npm": "8.12.2"
+  },
   "repository": "none",
   "dependencies": {
     "@emotion/react": "*",

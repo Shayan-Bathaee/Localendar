@@ -4,6 +4,10 @@
   "description": "cse115",
   "author": "",
   "license": "UNLICENSED",
+  "engines":{
+    "node": "v16.15.1",
+    "npm": "8.12.2"
+  },
   "repository": "none",
   "devDependencies": {
     "@types/google.maps": "^3.50.5",
