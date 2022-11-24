@@ -17,7 +17,7 @@ import PlacesAutocomplete, {
 // eventdescription
 function writeEventToDB (newEvent) {
   /* write event to database */
-  fetch('/v0/eventform', {
+  fetch('https://localendar/v0/eventform', {
     method: 'POST',
     body: JSON.stringify(newEvent),
     headers: {
