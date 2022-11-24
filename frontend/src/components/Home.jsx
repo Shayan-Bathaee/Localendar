@@ -279,7 +279,6 @@ function Home () {
           <div className='eventDescription'>
             {event.eventdescription}
           </div>
-          {user.email == event.email && <button className='deleteEvent' onClick={deleteEvent}>Delete</button>}
         </div>
       )
     })
