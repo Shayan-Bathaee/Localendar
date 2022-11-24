@@ -318,7 +318,6 @@ function Home() {
           <div id='profileName'>{name ? name : ''}</div>
           <div id='profilePicture'><img src = {icon ? icon : ''}/></div>
         </div>
-        <div id='viewProfile'>View Profile</div>
         <div id='createPost' onClick={createEvent}>Create Post</div>
         <div id='signOut' onClick={logout}>Logout</div>
       </div>
