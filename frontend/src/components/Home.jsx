@@ -113,7 +113,7 @@ function Home () {
   Geocode.setApiKey('AIzaSyAZwTrchd6eBtPRB7m1VOz5Fh5smHba5Us')
 
   const getEventsFromDB = () => {
-    fetch('https://localendar.herokuapp.com/v0/eventform', {
+    fetch('http://localhost:3010/v0/eventform', {
       method: 'GET'
     })
       .then((res) => {
