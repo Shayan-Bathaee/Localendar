@@ -4,11 +4,14 @@
   "description": "cse115",
   "author": "",
   "license": "UNLICENSED",
-  "engines":{
+  "engines": {
     "node": "v16.15.1",
     "npm": "8.12.2"
   },
-  "repository": "none",
+  "repository": {
+    "type": "git",
+    "url": "none"
+  },
   "devDependencies": {
     "@types/google.maps": "^3.50.5",
     "bestzip": "*"
@@ -31,5 +34,7 @@
     "react-places-autocomplete": "^7.3.0",
     "react-scripts": "^5.0.1",
     "use-places-autocomplete": "^4.0.0"
-  }
+  },
+  "main": "index.js",
+  "keywords": []
 }
