@@ -4,7 +4,7 @@
   "description": "Frontend",
   "author": "",
   "license": "UNLICENSED",
-  "engines":{
+  "engines": {
     "node": "v16.15.1",
     "npm": "8.12.2"
   },
@@ -16,10 +16,10 @@
     "@mui/material": "*",
     "emoji-picker-react": "*",
     "prop-types": "*",
-    "react": "*",
+    "react": "^18.2.0",
     "react-geocode": "^0.2.3",
     "react-router": "*",
-    "react-router-dom": "*"
+    "react-router-dom": "^6.4.3"
   },
   "devDependencies": {
     "msw": "*",
