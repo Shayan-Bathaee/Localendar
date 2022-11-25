@@ -1,7 +1,6 @@
 # Ignore node_modules in root of project
 nodes_modules
 
-.env
 
 # Misc
 **/.DS_Store
