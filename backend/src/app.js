@@ -5,6 +5,7 @@ const swaggerUi = require('swagger-ui-express')
 const fs = require('fs')
 const path = require('path')
 const OpenApiValidator = require('express-openapi-validator')
+const PORT = process.env.PORT || 3010;
 
 const auth = require('./auth')
 const event = require('./event')
