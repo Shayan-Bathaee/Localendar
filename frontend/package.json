@@ -15,7 +15,6 @@
     "@mui/icons-material": "*",
     "@mui/material": "*",
     "emoji-picker-react": "*",
-    "http-proxy-middleware": "^2.0.6",
     "prop-types": "*",
     "react": "^18.2.0",
     "react-geocode": "^0.2.3",
@@ -53,6 +52,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "http://localhost:3010"
+  }
 }
