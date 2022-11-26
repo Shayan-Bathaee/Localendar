@@ -30,7 +30,7 @@
   },
   "scripts": {
     "build": "react-scripts build",
-    "start": "node app.js",
+    "start": "react-scripts start",
     "test": "react-scripts test --coverage"
   },
   "jest": {
