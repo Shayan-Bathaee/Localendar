@@ -10,7 +10,7 @@ info:
   title: Backend
 
 servers:
-  - url: https://localendar.herokuapp.com/v0
+  - url: http://localhost:3010/v0
 
 paths:
   /homepage:
