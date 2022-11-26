@@ -25,7 +25,14 @@
     "start": "(npm run start-backend) & (npm run start-frontend)",
     "zip": "bestzip Assignment8.Submission.zip e2e/tests/* frontend/src/* backend/sql/* backend/src/* backend/api/*",
     "postinstall": "(npm run install-backend) && (npm run install-frontend)",
-    "heroku-postbuild": "cd frontend && npm install && npm run build"
+    "heroku-postbuild": "cd frontend && npm install && npm run build",
+    "test": "jest"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/mocks/fileMock.js"
+    }
   },
   "dependencies": {
     "cors": "^2.8.5",
