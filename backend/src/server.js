@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 3010;
 const path = require("path");
 
 
-if(process.env.NODE_ENV === "production"){
+if(process.env.PORT === "production"){
 
   app.use(express.static(path.join(__dirname, "frontend/build")));
 

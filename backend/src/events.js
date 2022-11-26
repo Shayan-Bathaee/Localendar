@@ -15,5 +15,5 @@ const proConfig = {
 }
 
 const pool = new Pool(
-  process.env.NODE_ENV === "production" ? proConfig : devConfig
+  process.env.PORT === "production" ? proConfig : devConfig
 );
