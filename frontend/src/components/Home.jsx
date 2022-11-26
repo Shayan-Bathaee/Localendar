@@ -27,16 +27,17 @@ const todaysDateInteger = todaysDate.getTime()
  * @param {*} eventLatitude
  * @param {*} eventLongitude
  */
-function calculateDistanceInMiles (userLatitude, userLongitude, eventLatitude, eventLongitude) {
+const calculateDistanceInMiles = (userLatitude, userLongitude, eventLatitude, eventLongitude) => {
   const userLatitudeRadians = userLatitude / 57.29577951
   const userLongitudeRadians = userLongitude / 57.29577951
   const eventLatitudeRadians = eventLatitude / 57.29577951
   const eventLongitudeRadians = eventLongitude / 57.29577951
   const distance = radiusOfEarthInMiles * Math.acos((Math.sin(userLatitudeRadians) * Math.sin(eventLatitudeRadians)) + (Math.cos(userLatitudeRadians) * Math.cos(eventLatitudeRadians) * Math.cos(eventLongitudeRadians - userLongitudeRadians)))
-  return distance
+  return Math.round(distance * 10) / 10;
 }
 
-function returnDateInt (event) {
+
+const returnDateInt = (event) => {
   const time = event.eventtime // get time as a string
   const dateString = event.eventdate // get date as a string
 
@@ -159,16 +160,15 @@ function Home () {
       }
     }
 
-    console.log('radius: ', radius)
-
     // sort the events based on their distance property
     eventsSortingCopy.sort((a, b) => {
       return a.distance - b.distance
     })
 
     // set the events now that they are sorted
-    setEvents(eventsSortingCopy)
+    setEvents(eventsSortingCopy);
   }
+
 
   const handleSortByDate = () => {
     const eventsSortingCopy = [...events]
@@ -257,7 +257,7 @@ function Home () {
 
       let distanceRender = ''
       if ('distance' in event) {
-        distanceRender = ' (' + Math.round(event.distance * 10) / 10 + ' mi)'
+        distanceRender = ' (' + event.distance + ' mi)'
       }
       return (
         <div className='event'>
@@ -377,4 +377,10 @@ function Home () {
   )
 }
 
-export default Home
+// Uncomment this line to test functions. App cannot run at the same time. 
+// module.exports = {calculateDistanceInMiles, returnDateInt, Home};
+
+export default Home;
+
+
+
