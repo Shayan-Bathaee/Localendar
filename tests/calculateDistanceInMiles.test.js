@@ -10,7 +10,6 @@ const calculateDistanceInMiles = require('../frontend/src/components/Home.jsx').
 
 // Equivalence class: +, -, 0
 test('Testing input (0, 0, 0, 0) equals 0', () => {
-    console.log("distance: ", calculateDistanceInMiles(0,0,0,0));
     expect(calculateDistanceInMiles(0,0,0,0).toPrecision(2)).toBe((0).toPrecision(2))
 });
 
