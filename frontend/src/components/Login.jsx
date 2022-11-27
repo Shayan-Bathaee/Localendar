@@ -33,7 +33,7 @@ function Login () {
     // setRedirectHome(true);
     // console.log("Encoded JWT ID token: " + response.credential);
 
-    fetch('https://localendar.herokuapp.com/v0/homepage', {
+    fetch('https://localendar.herokuapp.com', {
       method: 'POST',
       body: JSON.stringify(user),
       headers: {
