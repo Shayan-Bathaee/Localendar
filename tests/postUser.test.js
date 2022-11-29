@@ -2,7 +2,6 @@ import request from 'supertest';
 import express from 'express';
 
 require('jest-fetch-mock').enableMocks();
-const postUser = require('../backend/src/auth.js').post;
 global.alert = jest.fn();
 global.fetch = require('jest-fetch-mock');
 
@@ -16,7 +15,7 @@ app.post('/v0/homepage', async (req, res) => {
     return
   }
 
-  res.send({ email, name, pic })
+  res.status(200).send({ email, name, pic })
 });
 
 const newUser = {
@@ -39,6 +38,5 @@ test('Post new user', async () => {
 
 test('Post new user', async () => {
   const response = await request(app).post("/v0/homepage").send(badUser)
-  expect(response.statusCode).toBe(400);
-
+  expect(response.status).toBe(400);
 });
