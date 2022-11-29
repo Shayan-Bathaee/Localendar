@@ -48,6 +48,7 @@ function NewEvent () {
     lng: null
   })
 
+
   const handleSelect = async value => {
     const results = await geocodeByAddress(value)
     const latLng = await getLatLng(results[0])
@@ -61,11 +62,18 @@ function NewEvent () {
     setInputs((values) => ({ ...values, [name]: value }))
   }
 
+
   const handlePost = (event) => {
     event.preventDefault()
     // get user
     const user = JSON.parse(localStorage.getItem('user'))
     // build new event
+    // if(!coordinates.lat) 
+    //const isEnabled = coordinates.lat.length > 0
+    //console.log(isEnabled)
+
+
+
     const newEvent = {
       eventname: inputs.event_name,
       email: user.email,
@@ -76,6 +84,8 @@ function NewEvent () {
       longitude: coordinates.lng,
       eventdescription: inputs.description
     }
+    // console.log(coordinates.lat)
+    // console.log(address)
     writeEventToDB(newEvent)
     history('/homepage') // take user back to homepage when event is done
   }
@@ -85,6 +95,8 @@ function NewEvent () {
   const cancel = () => {
     window.history.back()
   }
+
+  
 
   return (
     <div>
@@ -170,13 +182,19 @@ function NewEvent () {
           </label>
           <br />
           <button className='cancel-bttn ' type='button' onClick={cancel}>Cancel</button>
-          <button className='post-bttn' type='submit'>Post</button>
+          
+          <button className='post-bttn' disabled = {inputs.description == null || inputs.description == "" || 
+          inputs.event_name == null || inputs.event_name == "" || coordinates.lat == null || 
+          inputs.date == null || inputs.date == "" || inputs.time == null || inputs.time == "" || 
+          inputs.date.search(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/) < 0 || 
+          inputs.time.search(/^(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)$/)} type='submit'>Post</button>
         </form>
       </div>
     </div>
   )
 }
 
-module.exports = {writeEventToDB};
+// Uncomment this line to test functions. App cannot run at the same time. 
+// module.exports = {writeEventToDB};
 
 export default NewEvent
