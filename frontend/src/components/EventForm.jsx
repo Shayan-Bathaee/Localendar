@@ -177,4 +177,6 @@ function NewEvent () {
   )
 }
 
+module.exports = {writeEventToDB};
+
 export default NewEvent
