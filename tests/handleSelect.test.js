@@ -5,8 +5,7 @@ jest.mock("dateformat", () => jest.fn());
 const calculateDistanceInMiles = require('../frontend/src/components/Home.jsx').calculateDistanceInMiles;
 
 /* testbench global variable declarations */
-var expectedOutput = [];
-var address = '';
+var address = ''
 var radius = 'any';
 var globalCoordinates = {
     lat: 0,

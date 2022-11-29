@@ -26,6 +26,6 @@ const users = [
 
 test('get user', async () => {
   const response = await request(app).get("/v0/homepage")
-  console.log(response.body.message)
+  // console.log(response.body.message)
   expect(response.body.message).toBe('First entry stored in the user database is test@test.com');
 });
