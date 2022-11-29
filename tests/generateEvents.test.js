@@ -74,7 +74,6 @@ const generateEvents = (events) => {
         if (returnDateInt(events[i]) < todaysDateInteger) {
           events[i].view = false
         } else {
-          console.log(todaysDateInteger);
           events[i].view = true
         }
       }
