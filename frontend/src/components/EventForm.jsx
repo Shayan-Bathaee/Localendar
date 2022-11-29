@@ -145,8 +145,6 @@ function NewEvent () {
               {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                 <div>
                   Location
-                  <p>Latitude: {coordinates.lat}</p>
-                  <p>Longitude: {coordinates.lng}</p>
                   <input type='text' name='location ' {...getInputProps({ placeholder: 'Type address' })} />
 
                   <div>
