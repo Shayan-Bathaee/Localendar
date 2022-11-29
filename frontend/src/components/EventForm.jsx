@@ -17,7 +17,7 @@ import PlacesAutocomplete, {
 // eventdescription
 function writeEventToDB (newEvent) {
   /* write event to database */
-  fetch('/v0/eventform', {
+  fetch('http://localhost:3010/v0/eventform', {
     method: 'POST',
     body: JSON.stringify(newEvent),
     headers: {
@@ -176,5 +176,7 @@ function NewEvent () {
     </div>
   )
 }
+
+module.exports = {writeEventToDB};
 
 export default NewEvent
