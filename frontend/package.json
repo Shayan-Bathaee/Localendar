@@ -22,6 +22,9 @@
     "react-router-dom": "^6.4.3"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
     "msw": "*",
     "puppeteer": "*",
     "puppeteer-core": "*",
@@ -30,7 +33,7 @@
   "scripts": {
     "build": "react-scripts build",
     "start": "react-scripts start",
-    "test": "react-scripts test --coverage"
+    "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!(dateformat)/)'"
   },
   "jest": {
     "collectCoverageFrom": [

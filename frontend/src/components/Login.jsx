@@ -21,6 +21,7 @@ function Login () {
 
   function handleSignIn (response) {
     const userObject = jwt_decode(response.credential)
+    console.log(userObject)
     console.log(userObject.email)
     const u = user
     u.email = userObject.email
