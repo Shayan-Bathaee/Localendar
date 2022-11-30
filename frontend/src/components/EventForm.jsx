@@ -185,7 +185,7 @@ function NewEvent () {
           inputs.event_name == null || inputs.event_name == "" || coordinates.lat == null || 
           inputs.date == null || inputs.date == "" || inputs.time == null || inputs.time == "" || 
           inputs.date.search(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/) < 0 || 
-          inputs.time.search(/^(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)$/)} type='submit'>Post</button>
+          inputs.time.search(/^(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)$/)<0} type='submit'>Post</button>
         </form>
       </div>
     </div>

@@ -1,27 +1,10 @@
-//const returnDateInt = require('../frontend/src/components/Home.jsx').returnDateInt;
+const returnDateInt = require('../frontend/src/components/Home.jsx').returnDateInt;
 jest.mock("dateformat", () => jest.fn());
 
 var showPastEvents = true;
 const todaysDate = new Date()
 todaysDate.setHours(0, 0, 0, 0)
 const todaysDateInteger = todaysDate.getTime()
-
-const returnDateInt = (event) => {
-  const time = event.eventtime // get time as a string
-  const dateString = event.eventdate // get date as a string
-
-  // get hours, minutes, and seconds
-  const eventHours = time.slice(0, 2)
-  const eventMinutes = time.slice(3, 5)
-  const eventSeconds = time.slice(6)
-
-  // typcast the string into a date, and update the hours, minutes, and seconds
-  const date = new Date(dateString)
-  date.setHours(parseInt(eventHours), parseInt(eventMinutes), parseInt(eventSeconds))
-
-  // return the integer version of the date
-  return date.getTime()
-}
 
 // Hardcoded events for testing
 var events = [
