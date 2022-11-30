@@ -36,27 +36,27 @@ var eventsUnsorted = [
     {
         eventname: '0',
         eventdate: '2027-02-01T08:00:00.000Z',
-        eventtime: '06:30:00',
+        eventtime: '05:30:00',
     },
     {
         eventname: '1',
         eventdate: '2026-02-01T08:00:00.000Z',
-        eventtime: '06:30:00',
+        eventtime: '04:30:00',
     },
     {
         eventname: '2',
         eventdate: '2025-02-01T08:00:00.000Z',
-        eventtime: '06:30:00',
+        eventtime: '03:30:00',
     },
     {
         eventname: '3',
         eventdate: '2024-02-01T08:00:00.000Z',
-        eventtime: '06:30:00',
+        eventtime: '02:30:00',
     },
     {
         eventname: '4',
         eventdate: '2023-02-01T08:00:00.000Z',
-        eventtime: '06:30:00',
+        eventtime: '01:30:00',
     }
 ];
 
@@ -210,7 +210,7 @@ test('Testing Already Sorted List', () => {
     expect(listSorted[4].eventname).toBe('4');
 });
 
-test('Testing Unsorted List', () => {
+test('Testing Unsorted List With Different Dates and Times', () => {
     var listUnsorted = handleSortByDate(eventsUnsorted);
     expect(listUnsorted[0].eventname).toBe('4');
     expect(listUnsorted[1].eventname).toBe('3');
