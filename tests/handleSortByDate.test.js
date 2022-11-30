@@ -144,6 +144,34 @@ var eventsDifferentTime = [
     }
 ];
 
+var eventsDifferentDate = [
+    {
+        eventname: '0',
+        eventdate: '2027-04-01T08:00:00.000Z',
+        eventtime: '06:30:00',
+    },
+    {
+        eventname: '1',
+        eventdate: '2027-03-01T08:00:00.000Z',
+        eventtime: '06:30:00',
+    },
+    {
+        eventname: '2',
+        eventdate: '2027-02-01T08:00:00.000Z',
+        eventtime: '06:30:00',
+    },
+    {
+        eventname: '3',
+        eventdate: '2027-12-01T08:00:00.000Z',
+        eventtime: '06:30:00',
+    },
+    {
+        eventname: '4',
+        eventdate: '2027-11-01T08:00:00.000Z',
+        eventtime: '06:30:00',
+    }
+];
+
 // Copied Functions From Home.jsx For Simplicity
 
 const returnDateInt = (event) => {
@@ -218,3 +246,11 @@ test('Testing Events With Same Date But Different Times', () => {
     expect(listDifferentTime[4].eventname).toBe('0');
 });
 
+test('Testing Events With Same Time But Different Date', () => {
+    var listDifferentDate = handleSortByDate(eventsDifferentDate);
+    expect(listDifferentDate[0].eventname).toBe('2');
+    expect(listDifferentDate[1].eventname).toBe('1');
+    expect(listDifferentDate[2].eventname).toBe('0');
+    expect(listDifferentDate[3].eventname).toBe('4');
+    expect(listDifferentDate[4].eventname).toBe('3');
+});
