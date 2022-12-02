@@ -1,6 +1,6 @@
 
 -- Populate user table with hardcoded values --
-INSERT INTO users(email, pic, username) VALUES ('bob@ucsc.com', 'https://lh3.googleusercontent.com/a/ALm5wu1BNu38NDJUK7MgGRRr8KQYLZN_PtqAiE9MXRrFJg=s96-c', 'Bob');
+INSERT INTO users(email, pic, username) VALUES ('bob@ucsc.com', 'https://yaffa-cdn.s3.amazonaws.com/yaffadsp/images/dmImage/StandardImage/the-reward.jpg', 'Bob');
 INSERT INTO users(email, pic, username) VALUES ('steve@ucsc.com', 'https://lh3.googleusercontent.com/a/ALm5wu2LYxyLQVPRYjO2SJEuz-wYzOulc7Vil4iWVu85=s96-c', 'Steve');
 INSERT INTO users(email, pic, username) VALUES ('cahoneydrops@gmail.com', 'https://www.gratefulweb.com/sites/default/files/images/articles/unnamed_1029.jpg', 'The California Honeydrops');
 INSERT INTO users(email, pic, username) VALUES ('joepesci@gmail.com', 'https://m.media-amazon.com/images/M/MV5BODA1OTcwMDk4OF5BMl5BanBnXkFtZTgwOTEyMDQ5NjE@._V1_.jpg', 'Joe Pesci');
