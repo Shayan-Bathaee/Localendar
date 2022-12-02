@@ -126,6 +126,8 @@ function NewEvent () {
   /**
    * Displays the page and creates the event form.
    */
+  // https://www.youtube.com/watch?v=uJYqQdnw8LE
+  // source used to help with using React Places Autocomplete and Google Maps Geocoder API
   return (
     <div>
       <div>
@@ -164,7 +166,7 @@ function NewEvent () {
             />
           </label>
           <label>
-
+            
             <PlacesAutocomplete
               value={address}
               onChange={setAddress}

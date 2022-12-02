@@ -1,6 +1,7 @@
-const returnDateInt = require('../frontend/src/components/EventForm.jsx');
+//Testing file for Submit Button in EventForm.jsx
 
-// Hardcoded events for testing
+
+// Hardcoded events for testing different test scenarios
 var inputs = [
     {
         eventname: 'New Event',
@@ -64,6 +65,10 @@ var inputs = [
 ];
 
 // For testing purposes only
+/**
+ * Function takes a list of potential input cases and determines whether they are valid
+ * @param {*} inputs - List of input cases
+ */
 const validInput = (inputs) => {
     for (let i = 0; i < inputs.length; i++) {
       if (inputs[i].eventdescription == null || inputs[i].eventdescription == "" || 
@@ -78,36 +83,42 @@ const validInput = (inputs) => {
     }
 }
 
+//Test if submit button is enabled if all inputs entered are valid
 test('Event #1 - All inputs are Valid', () => {
     validInput(inputs);
     expect(inputs[0].valid).toBe(true);
     
 });
 
+//Test if submit button is disabled if one input is empty
 test('Event #2 - Missing Input Value', () => {
     validInput(inputs);
     expect(inputs[1].valid).toBe(false);
     
 });
 
+//Test if submit button is disabled for invalid time input
 test('Event #3 - Invalid Time Format for Input', () => {
     validInput(inputs);
     expect(inputs[2].valid).toBe(false);
     
 });
 
+//Test if submit button is disabled for invalid date input
 test('Event #4 - Invalid Date Format for Input', () => {
     validInput(inputs);
     expect(inputs[3].valid).toBe(false);
     
 });
 
+//Test if submit button is disabled for non-existent location input
 test('Event #5 - Invalid Location in Input', () => {
     validInput(inputs);
     expect(inputs[4].valid).toBe(false);
     
 });
 
+//Test iif submit button is disabled when multiple inputs are unfilled
 test('Event #6 - Missing Multiple Input Values', () => {
     validInput(inputs);
     expect(inputs[5].valid).toBe(false);
