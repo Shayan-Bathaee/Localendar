@@ -5,8 +5,8 @@ require('jest-fetch-mock').enableMocks();
 global.alert = jest.fn();
 global.fetch = require('jest-fetch-mock');
 
+// get the user from the database
 let app = express();
-
 app.use(express.json());
 app.get('/v0/homepage', async (req, res) => {
   res.status(200).json({
@@ -16,6 +16,7 @@ app.get('/v0/homepage', async (req, res) => {
   })
 });
 
+// mock of the database
 const users = [
   {
     name: 'test',
@@ -24,6 +25,7 @@ const users = [
   }
 ]
 
+// gets the user database
 test('get user', async () => {
   const response = await request(app).get("/v0/homepage")
   // console.log(response.body.message)

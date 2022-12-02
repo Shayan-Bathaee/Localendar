@@ -3,6 +3,7 @@ html, body {
   padding: 0;
 }  
 
+/* formats background of login page */
 .home {
   background-color: rgb(214, 196, 171);
   height: 100%;
@@ -10,6 +11,7 @@ html, body {
   position: fixed;
 }
 
+/* formats logo container */
 .logoDiv {
   height: 300px;
   max-height: 30%;
@@ -20,11 +22,13 @@ html, body {
   margin-right: auto;
 }
 
+/* formats logo */
 .logoClass {
   border-radius: 30px;
   margin-bottom: 20px;
 }
 
+/* formats login container */
 .loginBox {
   padding-top: 20px;
   height: 150px;
@@ -69,12 +73,14 @@ html, body {
   background-color: transparent;
 }
 
+/* formats header */
 h1 {
   font-family: "Verdana";
   font-size: x-large;
   color: #32548b;
 }
 
+/* formats logout button */
 .logout-button {
   width: 100%;
   max-width: 8rem;
@@ -87,10 +93,12 @@ h1 {
   background-color: #f3f3eb;
 }
 
+/* formats logout button */
 .logout-button p {
   background-color: transparent;
 }
 
+/* formats signin button */
 #signInDiv {
   margin-bottom: 7%;
 }
