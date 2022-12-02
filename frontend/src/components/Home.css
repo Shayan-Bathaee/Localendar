@@ -1,3 +1,4 @@
+/* Keeps page header at top of page and above rest of elements */
 #pageHeader {
     background-color: #F2F2E9;
     height: 80px;
@@ -7,6 +8,7 @@
     z-index: 3;
 }
 
+/* Dims the entire page besides slideout menu */
 #pageDimmer {
     position: fixed;
     height: 100vh;
@@ -15,16 +17,19 @@
     z-index: 4;
 }
 
+/* Floats Localendar logo on left of page */
 .logo {
     height: 100%;
     float: left;
     margin-left: 20px;
 }
 
+/* Turns cursor into pointer when logo is hovered over */
 .logo:hover {
     cursor: pointer;
 }
 
+/* Contains the navigation bar lines and floats them to the right */
 #navBarContainer {
     height: 42px;
     width: 40px;
@@ -34,6 +39,7 @@
     margin-top: 19px;
 }
 
+/* Formats navigation bar lines */
 .navBarLine {
     height: 6px;
     width: 40px;
@@ -42,10 +48,12 @@
     margin-top: 6px;
 }
 
+/* Turns cursor into pointer when navigation bars are hovered over */
 #navBarContainer:hover {
     cursor: pointer;
 }
 
+/* Contains all of the location search bar elements in middle of page */
 #locationContainer {
     display: flex;
     background-color: rgba(0, 0, 0, 0);
@@ -58,6 +66,7 @@
     height: 42px;
 }
 
+/* Formats the search button on location search bar */
 #setButton {
     width: 25%;
     height: 40px;
@@ -73,6 +82,7 @@
     border: solid 1px rgb(0, 0, 0);
 }
 
+/* Formats the text portion of the location search bar */
 #textPortion {
     width: 100%;
     height: 38px;
@@ -84,20 +94,21 @@
     border: solid 1px rgb(0, 0, 0);
 }
 
+/* Turns the search button blue and turns the cursor into the pointer when
+search button is hovered over */
 #setButton:hover {
     background-color: #2E5584;
     color: #ffffff;
     cursor: pointer;
 }
 
+/* Contains all suggested results from the search bar */
 #resultsContainer {
     border-radius: 25px;
     background-color: #F2F2E9;
     padding-left: 20px;
     padding-right: 20px;
     width: 75vw;
-
-    /* width: 95%; */
     max-height: 152px;
     margin-left: auto;
     margin-right: auto;
@@ -107,10 +118,12 @@
     overflow-y: scroll;
 }
 
+/* Each contains a result from the search bar suggestions */
 #resultContainerSmall {
     width: 100%;
 }
 
+/* Formats each suggestion from the search bar */
 #result {
     overflow-x: scroll;
     color: gray;
@@ -125,16 +138,20 @@
     line-height: 38px;
 }
 
+/* Gets rid of scrollbar on the suggestions from the search bar */
 #result::-webkit-scrollbar {
     display: none;
 }
 
+/* Turns the background of suggestions darker and turns the cursor into
+a pointer when a suggestion is hovered over */
 #result:hover {
     background-color: #d4d4cc70;
     cursor: pointer;
     color:rgb(0, 0, 0);
 }
 
+/* Formats the Sort By Date Button and floats it left */
 #sortByDateButton {
     display: inline-block;
     margin-right: 10px;
@@ -142,6 +159,7 @@
     float: left;
 }
 
+/* Formats the Show Past Events Button and floats it left */
 #showPastEventsButton {
     display: inline-block;
     margin-bottom: 10px;
@@ -150,16 +168,19 @@
     float: left;
 }
 
+/* Darkens the Sort By Date button when it is hoverd over */
 #sortByDateButton:hover {
     filter: brightness(85%);
 }
 
+/* Formats the Radius button */
 #radiusButton {
     width: 13rem;
     margin-bottom: 10px;
     float: left;
 }
 
+/* Class for the Sort By Date button */
 .optionsButton {
     background-color: #2E5584;
     color: white;
@@ -171,6 +192,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Contains all of the filter buttons below the location search bar */
 #optionsContainer {
     width: 80vw;
     padding-left: 20px;
@@ -182,6 +204,7 @@
     margin-right: auto;
 }
 
+/* Formats the failed search container */
 #failedSearchContainer {
     background-color: white;
     float: inherit;
@@ -194,6 +217,7 @@
     width: 240px;
 }
 
+/* Formats text within the failed search container */
 #failedSearch {
     font-size: min(max(4vw, 20px), 15px);
     font-family: Arial, Helvetica, sans-serif;
@@ -202,6 +226,7 @@
     text-align: center;
 }
 
+/* Contains all of the events */
 #eventsContainer {
     background-color: rgb(214, 196, 171);
     height: 100%;
@@ -211,6 +236,7 @@
     padding-bottom: 20px;
 }
 
+/* Contains information for seperate events */
 .event {
     padding-left: 20px;
     padding-right: 20px;
@@ -231,6 +257,7 @@
     overflow: hidden;
 }
 
+/* Contains the meta data about the events in the top left half of the event container */
 .eventHalf {
     float: left;
     background-color: rgba(255, 0, 0, 0);
@@ -240,6 +267,7 @@
 
 }
 
+/* Formats the event name text */
 .eventName {
     width: 90%;
     margin: 0px 0px 0px 0px;
@@ -249,6 +277,7 @@
     hyphens: auto;
 }
 
+/* Formats the event details below the event name text */
 .eventDetails {
     width: 80%;
     margin: 5px 0px 20px 0px;
@@ -257,12 +286,14 @@
     color: rgb(187, 187, 187);
 }
 
+/* Formats the white border that seperates the event information from description */
 .eventBorder {
     float: left;
     width: 100%;
     border-top: solid 1px rgb(255, 255, 255);
 }
 
+/* Formats the event description text */
 .eventDescription {
     padding-top: 20px;
     float: right;
@@ -274,6 +305,7 @@
     margin-bottom: 20px;
 }
 
+/* Formats the profile portion of the event postings in the top right half */
 .profileHalf {
     float: right;
     background-color: rgba(255, 0, 0, 0);
@@ -283,6 +315,7 @@
     max-width: 30%;
 }
 
+/* Formats the delete button for posts */
 .deleteEvent {
     float: right; 
     margin-top: 10px;
@@ -296,6 +329,7 @@
     height: 1.5rem;
 }
 
+/* Formats the profile picture on each of the event postings */
 #eventPicture img {
     float: right;
     margin-right: 0px;
@@ -305,6 +339,7 @@
     margin-bottom: 10px;
 }
 
+/* Formats the text of the event poster in each event */
 #eventPoster {
     width: 100%;
     float: right;
@@ -316,7 +351,7 @@
     margin-bottom: 5px;
 }
 
-
+/* Formats the sliding menu and keeps it hidden with transform initially */
 #sidePanel {
     z-index: 5;
     height: 100vh;
@@ -330,11 +365,12 @@
     transition: transform 0.5s;
 }  
  
-
+/* Container for the profile name and picture on the sliding menu */
 #profileContainer{
     color: #F2F2E9;
 }
 
+/* Formats the profile name in the sliding menu */
 #profileName {
     display: block;
     margin-top: 10px;
@@ -345,6 +381,7 @@
     font-size: 30px;
 }
 
+/* Formats the profile picture in the sliding menu */
 #profilePicture img {
     display: block;
     margin-left: auto;
@@ -355,6 +392,7 @@
     margin-top: 10px;
 }
 
+/* Formats the "View Profile" text on the sliding menu */
 #viewProfile {
     border-top: solid 2px rgb(0, 0, 0);
     height: 20px;
@@ -366,6 +404,7 @@
     padding-top: 40px;
 }
 
+/* Formats the "Create Post" text on the sliding menu */
 #createPost {
     height: 20px;
     width: 100%;
@@ -375,6 +414,7 @@
     text-align: center;
 }
 
+/* Formats the "Logout" text on the sliding menu */
 #signOut {
     height: 20px;
     width: 100%;
@@ -384,22 +424,28 @@
     text-align: center;
 }
 
+/* Turns the Logout text black and turns the cursor into a pointer
+when the "Logout" text is hovered over on the sliding menu */
 #signOut:hover {
     color: black;
     cursor: pointer;
 }
 
+/* Turns the Create Post text black and turns the cursor into a pointer
+when the "Create Post" text is hovered over on the sliding menu */
 #createPost:hover {
     color: black;
     cursor: pointer;
 }
 
+/* Turns the View Profile text black and turns the cursor into a pointer
+when the "View Profile" text is hovered over on the sliding menu */
 #viewProfile:hover {
     color: black;
     cursor: pointer;
 }
 
-/* Slider button stuff, taken from w3 schools */
+/* Slider button, taken from w3 schools */
 /* The switch - the box around the slider */
 .switch {
     position: relative;
@@ -415,7 +461,7 @@
     height: 0;
   }
   
-  /* The slider */
+  /* The slider in the Show Past Events toggle */
   .slider {
     position: absolute;
     cursor: pointer;
@@ -428,6 +474,7 @@
     transition: .4s;
   }
   
+  /* Sets the position of the slider initially in the Show Past Events toggle */
   .slider:before {
     position: absolute;
     content: "";
@@ -440,14 +487,17 @@
     transition: .4s;
   }
   
+  /* Sets the color of the slider after it is toggled on */
   input:checked + .slider {
     background-color: #2196F3;
   }
   
+  /* Sets the box-shadow of the toggle for Show Past Events */
   input:focus + .slider {
     box-shadow: 0 0 1px #2196F3;
   }
   
+  /* Transforms the input */
   input:checked + .slider:before {
     -webkit-transform: translateX(13px);
     -ms-transform: translateX(13px);
@@ -459,6 +509,7 @@
     border-radius: 17px;
   }
   
+  /* Sets the border-radius of the slider before it is toggled on */
   .slider.round:before {
     border-radius: 50%;
   }
