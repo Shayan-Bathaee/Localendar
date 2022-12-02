@@ -345,6 +345,7 @@ function Home () {
       // JSX for event posting if it meets filter criteria
       return (
         <div className='event'>
+          {/* Top left of event post with event information: date, time, name, etc) */}
           <div className='eventHalf'>
             <div className='eventName'>{event.eventname}</div>
             <div className='eventDetails'>
@@ -355,11 +356,13 @@ function Home () {
               {dateFormat(event.eventdate, 'dddd, mmm d, yyyy')}
             </div>
           </div>
+          {/* Top right of event post with profile information: poster, profile pic, etc */}
           <div className='profileHalf'>
             <div id='eventPoster'>{event.email}</div>
             <div id='eventPicture'><img src={event.profilepic} /></div>
           </div>
           <div className='eventBorder' />
+          {/* Decsription on bottom half of the event posts */}
           <div className='eventDescription'>
             {event.eventdescription}
           </div>
@@ -385,6 +388,7 @@ function Home () {
     
     // JSX for Home page
     <div>
+      {/* Popout menu that slides out when the toggle menu is pressed in top menu */}
       <div id='sidePanel' style={{ transform: transformer }}>
         <div id='profileContainer'>
           <div id='profileName'>{name || ''}</div>
@@ -394,6 +398,7 @@ function Home () {
         <div id='signOut' onClick={logout}>Logout</div>
       </div>
       <div>
+        {/* Header of page that contains logo and popout menu toggle */}
         <div id='pageHeader'>
           <img src={logo} alt='logo' className='logo' />
           <div id='navBarContainer' onClick={() => togglePanel('open')}>
@@ -402,10 +407,12 @@ function Home () {
             <div className='navBarLine' />
           </div>
         </div>
+        {/* Dimmer for page that is enabled when the toggle menu is opened */}
         <div
           id='pageDimmer' onClick={() => togglePanel('close')}
           style={{ display: dim }}
         />
+        {/* Container that holds all of the events, search bar, and filters */}
         <div id='eventsContainer'>
           {/* Parts of PlacesAutocomplete used from the youtube video:
           https://www.youtube.com/watch?v=uJYqQdnw8LE */}
@@ -436,6 +443,7 @@ function Home () {
               </div>
             )}
           </PlacesAutocomplete>
+          {/* Filter buttons that are below the search bar on home page */}
           <div id='optionsContainer'>
             <button id='sortByDateButton' class='optionsButton' onClick={handleSortByDate}>Sort By Date</button>
             <div id='showPastEventsContainer'>
@@ -463,6 +471,7 @@ function Home () {
               </button>
             </div>
           </div>
+          {/* Events that are generated when the page is loaded */}
           {generateEvents(events)}
         </div>
       </div>
