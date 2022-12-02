@@ -7,15 +7,14 @@ import PlacesAutocomplete, {
   getLatLng
 } from 'react-places-autocomplete'
 
-
 /**
  * Writes an event to the database.
  * If newEvent is invalid, an alert pop up window is displayed
  * with the message "Error setting up the event"
- * 
+ *
  * @return {*} response.json
  * @param {*} newEvent
- * newEvent is an object containing: 
+ * newEvent is an object containing:
  * eventname
  * email
  * eventdate ('YYYY-MM-DD')
@@ -47,9 +46,8 @@ function writeEventToDB (newEvent) {
     })
 }
 
-
 /**
- * Handles creating the new event object that will be 
+ * Handles creating the new event object that will be
  * passed to the function writeEventToDB(newEvent)
  */
 function NewEvent () {
@@ -63,7 +61,7 @@ function NewEvent () {
   /**
    * Handles setting the location and coordinates of the event
    * from the address entered into the field.
-   * 
+   *
    * @param {*} value
   */
   const handleSelect = async value => {
@@ -75,7 +73,7 @@ function NewEvent () {
 
   /**
    * Sets the state variables to the information entered on the form.
-   * 
+   *
    * @param {*} event
    */
   const handleChange = (event) => {
@@ -90,8 +88,8 @@ function NewEvent () {
    * Then creates the newEvent object by setting the variables
    * to the states that stored the entered information. It then
    * passes newEvent to writeEventToDB() and navigates back to
-   * the homepage. 
-   * 
+   * the homepage.
+   *
    * @param {*} event
    */
   const handlePost = (event) => {
@@ -115,7 +113,7 @@ function NewEvent () {
   const history = useNavigate()
 
   /**
-   * Handles the cancel button when pressed. 
+   * Handles the cancel button when pressed.
    * It navigates back to the homepage without storing any
    * of the entered information.
    */
@@ -166,7 +164,7 @@ function NewEvent () {
             />
           </label>
           <label>
-            
+
             <PlacesAutocomplete
               value={address}
               onChange={setAddress}
@@ -210,19 +208,22 @@ function NewEvent () {
           </label>
           <br />
           <button className='cancel-bttn ' type='button' onClick={cancel}>Cancel</button>
-          
-          <button className='post-bttn' disabled = {inputs.description == null || inputs.description == "" || 
-          inputs.event_name == null || inputs.event_name == "" || coordinates.lat == null || 
-          inputs.date == null || inputs.date == "" || inputs.time == null || inputs.time == "" || 
-          inputs.date.search(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/) < 0 || 
-          inputs.time.search(/^(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)$/)<0} type='submit'>Post</button>
+
+          <button
+            className='post-bttn' disabled={inputs.description == null || inputs.description == '' ||
+          inputs.event_name == null || inputs.event_name == '' || coordinates.lat == null ||
+          inputs.date == null || inputs.date == '' || inputs.time == null || inputs.time == '' ||
+          inputs.date.search(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/) < 0 ||
+          inputs.time.search(/^(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)$/) < 0} type='submit'
+          >Post
+          </button>
         </form>
       </div>
     </div>
   )
 }
 
-// Uncomment this line to test functions. App cannot run at the same time. 
+// Uncomment this line to test functions. App cannot run at the same time.
 // module.exports = {writeEventToDB};
 
 export default NewEvent

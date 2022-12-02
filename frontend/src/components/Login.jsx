@@ -20,14 +20,13 @@ function Login () {
   const history = useNavigate()
 
   function handleSignIn (response) {
-
     const userObject = jwt_decode(response.credential) // get entire google response
     const u = user // retreive email, name, and profile picture
     u.email = userObject.email
     u.name = userObject.given_name
     u.pic = userObject.picture
 
-    setUser(u) // set user state variable 
+    setUser(u) // set user state variable
     document.getElementById('signInDiv').hidden = true // hide the sign in div
 
     // write the user information to the database

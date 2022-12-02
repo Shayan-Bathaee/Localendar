@@ -1,6 +1,6 @@
 const db = require('./db')
 const { Pool } = require('pg')
-require("dotenv").config();
+require('dotenv').config()
 
 /**
  * Configures the database that uses Postgres
@@ -17,22 +17,21 @@ const devConfig = {
  * Configuration for webhosting using Heroku
  */
 const proConfig = {
-  connectionString: process.env.DATABASE_URL //heroku add-on
+  connectionString: process.env.DATABASE_URL // heroku add-on
 }
 
 /**
  * Determines whether to run on Heroku or locally
  */
 const pool = new Pool(
-  process.env.PORT === "production" ? proConfig : devConfig
-);
-
+  process.env.PORT === 'production' ? proConfig : devConfig
+)
 
 /**
  * POST call that writes new user information into the database.
- * 
- * @param {*} req 
- * @param {*} res 
+ *
+ * @param {*} req
+ * @param {*} res
  */
 exports.post = async (req, res) => {
   const { name, email, pic } = req.body
@@ -48,5 +47,4 @@ exports.post = async (req, res) => {
       res.status(200).json({ email, pic, name })
     }
   )
-
 }

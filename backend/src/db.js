@@ -1,5 +1,5 @@
 const { Pool } = require('pg')
-require("dotenv").config();
+require('dotenv').config()
 
 // Configurations for PostgreSQL
 const devConfig = {
@@ -17,12 +17,11 @@ const proConfig = {
 
 // Construct pool for connection between database and client
 const pool = new Pool(
-  process.env.PORT === "production" ? proConfig : devConfig
-);
+  process.env.PORT === 'production' ? proConfig : devConfig
+)
 
 // Retrieves user from the database
 exports.selectUser = async (user) => {
-
   // Build SQL for database query
   let select = 'SELECT * FROM users'
   if (user) {

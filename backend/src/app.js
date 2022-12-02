@@ -5,7 +5,7 @@ const swaggerUi = require('swagger-ui-express')
 const fs = require('fs')
 const path = require('path')
 const OpenApiValidator = require('express-openapi-validator')
-const PORT = process.env.PORT || 3010;
+const PORT = process.env.PORT || 3010
 
 const auth = require('./auth')
 const event = require('./event')
@@ -27,7 +27,6 @@ app.use(
     validateResponses: true
   })
 )
-
 
 app.post('/v0/homepage', auth.post)
 app.get('/v0/eventform', event.get)

@@ -32,23 +32,22 @@ const todaysDateInteger = todaysDate.getTime()
  * Returns distance in miles from user's location to events
  * @return {number} - Distance in miles from user's location to events
  * @param {number} userLatitude - Latitude of the user's current location
- * @param {number} userLongitude - Longitude 
+ * @param {number} userLongitude - Longitude
  * @param {number} eventLatitude
  * @param {number} eventLongitude
  */
 const calculateDistanceInMiles = (userLatitude, userLongitude, eventLatitude, eventLongitude) => {
-
   // Converts latitudes and longitudes into radians
   const userLatitudeRadians = userLatitude / 57.29577951
   const userLongitudeRadians = userLongitude / 57.29577951
   const eventLatitudeRadians = eventLatitude / 57.29577951
   const eventLongitudeRadians = eventLongitude / 57.29577951
 
-  // Calculates distance 
+  // Calculates distance
   const distance = radiusOfEarthInMiles * Math.acos((Math.sin(userLatitudeRadians) * Math.sin(eventLatitudeRadians)) + (Math.cos(userLatitudeRadians) * Math.cos(eventLatitudeRadians) * Math.cos(eventLongitudeRadians - userLongitudeRadians)))
 
   // Returns distance
-  return Math.round(distance * 10) / 10;
+  return Math.round(distance * 10) / 10
 }
 
 /**
@@ -57,7 +56,6 @@ const calculateDistanceInMiles = (userLatitude, userLongitude, eventLatitude, ev
  * @returns - Time in miliseconds since January 1, 1970
  */
 const returnDateInt = (event) => {
-
   // Extract event time and event date from event object
   const time = event.eventtime
   const dateString = event.eventdate
@@ -77,11 +75,10 @@ const returnDateInt = (event) => {
 
 /**
  * Checks if every element within the array of events is undefined
- * @param {array} - 
+ * @param {array} -
  * @returns - Boolean for whether all elements are undefined with the events array
  */
 function allElementsAreUndefined (array) {
-
   // Returns boolean for whether all elements are undefined within the events array
   return array.every(element => element === undefined)
 }
@@ -90,7 +87,6 @@ function allElementsAreUndefined (array) {
  * @return {object} - Home page for the website
  */
 function Home () {
-  
   // Constant for local information stored about current user
   const user = JSON.parse(localStorage.getItem('user'))
 
@@ -136,7 +132,6 @@ function Home () {
    * @param {string} action - String that signifies whether to close or open sliding meunu
    */
   const togglePanel = (action) => {
-
     // If string is 'close' then we translate the sliding menu to hide it and undim the page. If
     // the string is 'open' then we translate the sliding menu to be seen and dim background
     if (action === 'close') {
@@ -159,7 +154,6 @@ function Home () {
       method: 'GET'
     })
       .then((res) => {
-
         // If there is an issue with the response, display it, otherwise return events json
         if (!res.ok) {
           throw res
@@ -167,7 +161,6 @@ function Home () {
         return res.json()
       })
       .then((json) => {
-        
         // Sort events from database if they are retrieve successfully and display them
         for (let i = 0; i < json.data.length; i++) {
           json.data[i].dateInteger = returnDateInt(json.data[i])
@@ -178,7 +171,6 @@ function Home () {
         setEvents(json.data)
       })
       .catch((err) => {
-
         // Alert user if there has been error retrieving events
         console.log(err)
         alert('Error reading event')
@@ -191,7 +183,6 @@ function Home () {
    * @param {string} value - Address currently typed in the search bar
    */
   const handleSelect = async value => {
-
     // Retrieve latitude and longitude from geocode
     const results = await geocodeByAddress(value)
     const latLng = await getLatLng(results[0])
@@ -221,14 +212,13 @@ function Home () {
     })
 
     // Set the currently displayed events to the sorted copy of events list
-    setEvents(eventsSortingCopy);
+    setEvents(eventsSortingCopy)
   }
 
   /**
    * Sorts the events displayed from earliest to latest when the "Sort By Date" is selected
    */
   const handleSortByDate = () => {
-
     // Create copy of events list and add new property "dateInteger" (miliseconds returned by returnDateInt)
     const eventsSortingCopy = [...events]
     for (let i = 0; i < eventsSortingCopy.length; i++) {
@@ -248,7 +238,6 @@ function Home () {
    * Displays the past events when the "Show Past Events" button is selected
    */
   const handleShowPastEvents = () => {
-
     // Creates copy of the events list and changes their view property depending on whether
     // the user has requested past events or not
     showPastEvents = !showPastEvents
@@ -275,7 +264,6 @@ function Home () {
    * @param {object} e - Radius selected by the user
    */
   const handleRadiusChange = (e) => {
-
     // Create copy of events list
     const eventsCopy = [...events]
     const eventsCopyLength = eventsCopy.length
@@ -287,12 +275,11 @@ function Home () {
         eventsCopy[i].inRadius = true
       }
     } else {
-
       // Otherwise, parse through the events and check if they are within the radius
       const newRadius = parseInt(e.target.value)
       for (let i = 0; i < eventsCopyLength; i++) {
         if ('distance' in eventsCopy[i]) {
-          if (eventsCopy[i].distance > newRadius) { 
+          if (eventsCopy[i].distance > newRadius) {
             eventsCopy[i].inRadius = false
           } else {
             eventsCopy[i].inRadius = true
@@ -314,7 +301,6 @@ function Home () {
    * @returns - JSX for event postings
    */
   const generateEvents = (events) => {
-
     // Change the views of the events depending on whether the user wants past events
     for (let i = 0; i < events.length; i++) {
       if (showPastEvents) {
@@ -330,7 +316,6 @@ function Home () {
 
     // Returns list of events that meet specified criteria by user
     const eventsList = events.map((event) => {
-
       // If the event does not meet the user's filters, then return nothing for event
       if ((event.view == false) || (event.inRadius == false)) {
         return
@@ -385,7 +370,7 @@ function Home () {
   }
 
   return (
-    
+
     // JSX for Home page
     <div>
       {/* Popout menu that slides out when the toggle menu is pressed in top menu */}
@@ -415,7 +400,7 @@ function Home () {
         {/* Container that holds all of the events, search bar, and filters */}
         <div id='eventsContainer'>
           {/* Parts of PlacesAutocomplete used from the youtube video and website:
-          https://www.youtube.com/watch?v=uJYqQdnw8LE 
+          https://www.youtube.com/watch?v=uJYqQdnw8LE
           https://www.npmjs.com/package/react-places-autocomplete
           */}
           <PlacesAutocomplete
@@ -481,10 +466,7 @@ function Home () {
   )
 }
 
-// Uncomment this line to test functions. App cannot run at the same time. 
+// Uncomment this line to test functions. App cannot run at the same time.
 // module.exports = {calculateDistanceInMiles, returnDateInt, Home};
 
-export default Home;
-
-
-
+export default Home

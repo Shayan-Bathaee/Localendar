@@ -1,7 +1,7 @@
 const db = require('./db')
 const { Pool } = require('pg')
 const fs = require('fs')
-require("dotenv").config();
+require('dotenv').config()
 
 /**
  * Configures the database that uses Postgres
@@ -18,16 +18,16 @@ const devConfig = {
  * Configuration for webhosting using Heroku
  */
 const proConfig = {
-  connectionString: process.env.DATABASE_URL 
+  connectionString: process.env.DATABASE_URL
 }
 
 const pool = new Pool(
-  process.env.PORT === "production" ? proConfig : devConfig
-);
+  process.env.PORT === 'production' ? proConfig : devConfig
+)
 
 /**
  * Retrieves all the events from the database.
- * 
+ *
  * @returns rows
  */
 const getEvents = async () => {
@@ -42,8 +42,8 @@ const getEvents = async () => {
 
 /**
  * Selects the user that's trying to log in from the database.
- * 
- * @param {*} user 
+ *
+ * @param {*} user
  * @returns rows[0].pic
  */
 const selectUser = async (user) => {
@@ -64,9 +64,9 @@ const selectUser = async (user) => {
  * GET call that retrieves all the events from the database.
  * Sets the profile picture for that event to the corresponding
  * user's profile picture to be displayed on the event card.
- * 
- * @param {*} req 
- * @param {*} res 
+ *
+ * @param {*} req
+ * @param {*} res
  */
 exports.get = async (req, res) => {
   const u = await getEvents()
@@ -83,9 +83,9 @@ exports.get = async (req, res) => {
 
 /**
  * POST call that writes the new event into the database.
- * 
- * @param {*} req 
- * @param {*} res 
+ *
+ * @param {*} req
+ * @param {*} res
  */
 exports.post = async (req, res) => {
   const { eventname, email, eventdate, eventtime, eventlocation, latitude, longitude, eventdescription } = req.body
