@@ -67,6 +67,9 @@
 }
 
 /* Formats the search button on location search bar */
+/* Code for font-size: min(max(px, px), px) used from website:
+ https://css-tricks.com/how-do-you-do-max-font-size-in-css/ 
+ */
 #setButton {
     width: 25%;
     height: 40px;
@@ -83,6 +86,9 @@
 }
 
 /* Formats the text portion of the location search bar */
+/* Code for font-size: min(max(px, px), px) used from website:
+ https://css-tricks.com/how-do-you-do-max-font-size-in-css/ 
+ */
 #textPortion {
     width: 100%;
     height: 38px;
@@ -124,6 +130,9 @@ search button is hovered over */
 }
 
 /* Formats each suggestion from the search bar */
+/* Code for font-size: min(max(px, px), px) used from website:
+ https://css-tricks.com/how-do-you-do-max-font-size-in-css/ 
+ */
 #result {
     overflow-x: scroll;
     color: gray;
@@ -181,6 +190,9 @@ a pointer when a suggestion is hovered over */
 }
 
 /* Class for the Sort By Date button */
+/* Code for font-size: min(max(px, px), px) used from website:
+ https://css-tricks.com/how-do-you-do-max-font-size-in-css/ 
+ */
 .optionsButton {
     background-color: #2E5584;
     color: white;
@@ -218,6 +230,9 @@ a pointer when a suggestion is hovered over */
 }
 
 /* Formats text within the failed search container */
+/* Code for font-size: min(max(px, px), px) used from website:
+ https://css-tricks.com/how-do-you-do-max-font-size-in-css/ 
+ */
 #failedSearch {
     font-size: min(max(4vw, 20px), 15px);
     font-family: Arial, Helvetica, sans-serif;
@@ -268,6 +283,9 @@ a pointer when a suggestion is hovered over */
 }
 
 /* Formats the event name text */
+/* Code for font-size: min(max(px, px), px) used from website:
+ https://css-tricks.com/how-do-you-do-max-font-size-in-css/ 
+ */
 .eventName {
     width: 90%;
     margin: 0px 0px 0px 0px;
@@ -278,6 +296,9 @@ a pointer when a suggestion is hovered over */
 }
 
 /* Formats the event details below the event name text */
+/* Code for font-size: min(max(px, px), px) used from website:
+ https://css-tricks.com/how-do-you-do-max-font-size-in-css/ 
+ */
 .eventDetails {
     width: 80%;
     margin: 5px 0px 20px 0px;
@@ -294,6 +315,9 @@ a pointer when a suggestion is hovered over */
 }
 
 /* Formats the event description text */
+/* Code for font-size: min(max(px, px), px) used from website:
+ https://css-tricks.com/how-do-you-do-max-font-size-in-css/ 
+ */
 .eventDescription {
     padding-top: 20px;
     float: right;
@@ -340,6 +364,9 @@ a pointer when a suggestion is hovered over */
 }
 
 /* Formats the text of the event poster in each event */
+/* Code for font-size: min(max(px, px), px) used from website:
+ https://css-tricks.com/how-do-you-do-max-font-size-in-css/ 
+ */
 #eventPoster {
     width: 100%;
     float: right;
@@ -352,6 +379,9 @@ a pointer when a suggestion is hovered over */
 }
 
 /* Formats the sliding menu and keeps it hidden with transform initially */
+/* Code for sliding panel gotten from StackOverflow post:
+https://stackoverflow.com/questions/15658858/how-to-make-div-slide-from-right-to-left
+*/
 #sidePanel {
     z-index: 5;
     height: 100vh;

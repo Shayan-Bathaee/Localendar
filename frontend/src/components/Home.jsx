@@ -407,6 +407,8 @@ function Home () {
           style={{ display: dim }}
         />
         <div id='eventsContainer'>
+          {/* Parts of PlacesAutocomplete used from the website:
+          https://www.npmjs.com/package/react-places-autocomplete */}
           <PlacesAutocomplete
             value={address}
             onChange={setAddress}
