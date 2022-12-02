@@ -1,7 +1,8 @@
 // This file tests the function calculateDistanceInMiles in the file 'Home.jsx'
 // Expected outputs and actual outputs are compared after being adjusted to two significant figures
 
-// setup, mock date and import calculate distance function
+// setup
+// mock date and import calculate distance function
 jest.mock("dateformat", () => jest.fn());
 const calculateDistanceInMiles = require('../frontend/src/components/Home.jsx').calculateDistanceInMiles;
 

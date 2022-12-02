@@ -7,7 +7,7 @@ import './components/App.css'
 import EventForm from './components/EventForm'
 
 /**
- * Simple component with no state.
+ * App component to keep track of routes in the program
  *
  * @return {object} JSX
  */

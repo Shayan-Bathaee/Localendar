@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import jwt_decode from 'jwt-decode'
 
 /**
- * Simple component with one state variable.
+ * Login component
  *
  * @return {object} JSX
  */
@@ -15,25 +15,22 @@ function Login () {
   const [homeDisplay, setHomeDisplay] = React.useState('none')
   const [loginDisplay, setLoginDisplay] = React.useState('block')
 
-  const [user, setUser] = React.useState({ email: '', name: '', pic: '' })
+  const [user, setUser] = React.useState({ email: '', name: '', pic: '' }) // begin with empty user
 
   const history = useNavigate()
 
   function handleSignIn (response) {
-    const userObject = jwt_decode(response.credential)
-    console.log(userObject)
-    console.log(userObject.email)
-    const u = user
+
+    const userObject = jwt_decode(response.credential) // get entire google response
+    const u = user // retreive email, name, and profile picture
     u.email = userObject.email
     u.name = userObject.given_name
     u.pic = userObject.picture
-    setUser(u)
-    console.log(user)
-    document.getElementById('signInDiv').hidden = true
-    // window.profile_name = user_object.name;
-    // setRedirectHome(true);
-    // console.log("Encoded JWT ID token: " + response.credential);
 
+    setUser(u) // set user state variable 
+    document.getElementById('signInDiv').hidden = true // hide the sign in div
+
+    // write the user information to the database
     fetch('http://localhost:3010/v0/homepage', {
       method: 'POST',
       body: JSON.stringify(user),
@@ -42,16 +39,13 @@ function Login () {
       }
     })
       .then((res) => {
-        // console.log(res);
         if (!res.ok) {
           throw res
         } return res.json()
       })
       .then((json) => {
-        console.log('correct password')
-        console.log(json)
-        localStorage.setItem('user', JSON.stringify(json))
-        history('/homepage')
+        localStorage.setItem('user', JSON.stringify(json)) // add the user to local storage for easy reference
+        history('/homepage') // navigate to homepage
       })
       .catch((err) => {
         console.log(err)
@@ -59,8 +53,8 @@ function Login () {
       })
   }
 
+  // set up google sign in div
   useEffect(() => {
-    /* global google */
     google.accounts.id.initialize({
       client_id: '792919383337-pnkkhet0sprdmlf00ojncglrujh3ve0r.apps.googleusercontent.com',
       callback: handleSignIn

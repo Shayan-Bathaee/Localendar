@@ -1,17 +1,19 @@
 // This file tests handleSelect in Home.jsx
 
-/* load in the file */
+// setup
+// mock date and import calculate distance function
 jest.mock("dateformat", () => jest.fn());
 const calculateDistanceInMiles = require('../frontend/src/components/Home.jsx').calculateDistanceInMiles;
 
-/* testbench global variable declarations */
-var address = ''
+// declare global variables needed for testing
+var address = '';
 var radius = 'any';
 var globalCoordinates = {
     lat: 0,
     lng: 0
 };
 
+// Declare event array for testing. Addresses of events are across the country in random order
 var events = [
     {
         eventname: '0',
@@ -66,15 +68,9 @@ var events = [
 ];
 
 
-/* function under test */
+// declare function under test
+// Changes made to function for testing: No use states, and no using google maps APIs. Hardcoded inputs for latitude and longitude.
 const handleSelect = () => {
-    // For testing only: No use states, and no using google maps APIs. Hardcoded inputs for latitude and longitude.
-    // const results = await geocodeByAddress(value)
-    // const latLng = await getLatLng(results[0])
-    // setAddress(value)
-    // globalCoordinates.lat = latLng.lat
-    // globalCoordinates.lng = latLng.lng
-
     // for each event, calculate distance and add it as an event property, then figure out if they are in radius
     const eventsSortingCopy = [...events]
     for (let i = 0; i < eventsSortingCopy.length; i++) {
@@ -93,9 +89,8 @@ const handleSelect = () => {
         return a.distance - b.distance
     })
 
-    // set the events now that they are sorted
-    // setEvents(eventsSortingCopy);
-    return eventsSortingCopy; // For testing only: we return the events to check if they are sorted
+    // return the events to check if they are sorted
+    return eventsSortingCopy;
 }
 
 
