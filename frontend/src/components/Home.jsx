@@ -414,8 +414,10 @@ function Home () {
         />
         {/* Container that holds all of the events, search bar, and filters */}
         <div id='eventsContainer'>
-          {/* Parts of PlacesAutocomplete used from the youtube video:
-          https://www.youtube.com/watch?v=uJYqQdnw8LE */}
+          {/* Parts of PlacesAutocomplete used from the youtube video and website:
+          https://www.youtube.com/watch?v=uJYqQdnw8LE 
+          https://www.npmjs.com/package/react-places-autocomplete
+          */}
           <PlacesAutocomplete
             value={address}
             onChange={setAddress}
