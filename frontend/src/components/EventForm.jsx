@@ -208,7 +208,9 @@ function NewEvent () {
           </label>
           <br />
           <button className='cancel-bttn ' type='button' onClick={cancel}>Cancel</button>
-
+          {//https://stackoverflow.com/questions/22061723/regex-date-validation-for-yyyy-mm-dd
+           //https://stackoverflow.com/questions/8318236/regex-pattern-for-hhmmss-time-string 
+          }
           <button
             className='post-bttn' disabled={inputs.description == null || inputs.description == '' ||
           inputs.event_name == null || inputs.event_name == '' || coordinates.lat == null ||
