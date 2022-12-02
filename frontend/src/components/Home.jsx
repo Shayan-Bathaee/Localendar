@@ -407,7 +407,7 @@ function Home () {
           style={{ display: dim }}
         />
         <div id='eventsContainer'>
-          {/* Parts of PlacesAutocomplete used from the website:
+          {/* Parts of PlacesAutocomplete used from the youtube video:
           https://www.youtube.com/watch?v=uJYqQdnw8LE */}
           <PlacesAutocomplete
             value={address}
