@@ -9,65 +9,92 @@ import PlacesAutocomplete, {
   getLatLng
 } from 'react-places-autocomplete'
 
+// Global coordinates of the selected location in the search bar
 const globalCoordinates = {
   lat: 0,
   lng: 0
 }
+
+// Global constant for radius of earth
 const radiusOfEarthInMiles = 3963
+
+// Global variable for tracking whether the user wants to display past events
 let showPastEvents = false
 
+// Global constant for todays date and time
 const todaysDate = new Date()
 todaysDate.setHours(0, 0, 0, 0)
+
+// Global constant for miliseconds occuring since Janurary 1, 1970 to todays date
 const todaysDateInteger = todaysDate.getTime()
 
 /**
- * @return {*} distance between the user and the event
- * @param {*} userLatitude
- * @param {*} userLongitude
- * @param {*} eventLatitude
- * @param {*} eventLongitude
+ * Returns distance in miles from user's location to events
+ * @return {number} - Distance in miles from user's location to events
+ * @param {number} userLatitude - Latitude of the user's current location
+ * @param {number} userLongitude - Longitude 
+ * @param {number} eventLatitude
+ * @param {number} eventLongitude
  */
 const calculateDistanceInMiles = (userLatitude, userLongitude, eventLatitude, eventLongitude) => {
+
+  // Converts latitudes and longitudes into radians
   const userLatitudeRadians = userLatitude / 57.29577951
   const userLongitudeRadians = userLongitude / 57.29577951
   const eventLatitudeRadians = eventLatitude / 57.29577951
   const eventLongitudeRadians = eventLongitude / 57.29577951
+
+  // Calculates distance 
   const distance = radiusOfEarthInMiles * Math.acos((Math.sin(userLatitudeRadians) * Math.sin(eventLatitudeRadians)) + (Math.cos(userLatitudeRadians) * Math.cos(eventLatitudeRadians) * Math.cos(eventLongitudeRadians - userLongitudeRadians)))
+
+  // Returns distance
   return Math.round(distance * 10) / 10;
 }
 
-
+/**
+ * Function takes an event object and returns time in miliseconds
+ * @param {object} event - Object containing information about the event
+ * @returns - Time in miliseconds since January 1, 1970
+ */
 const returnDateInt = (event) => {
-  const time = event.eventtime // get time as a string
-  const dateString = event.eventdate // get date as a string
 
-  // get hours, minutes, and seconds
+  // Extract event time and event date from event object
+  const time = event.eventtime
+  const dateString = event.eventdate
+
+  // Slice the event time string to get hour, minute, and seconds
   const eventHours = time.slice(0, 2)
   const eventMinutes = time.slice(3, 5)
   const eventSeconds = time.slice(6)
 
-  // typcast the string into a date, and update the hours, minutes, and seconds
+  // Create new date object with the event date string and set the time below
   const date = new Date(dateString)
   date.setHours(parseInt(eventHours), parseInt(eventMinutes), parseInt(eventSeconds))
 
-  // return the integer version of the date
+  // Return time of date in miliseconds since January 1, 1970
   return date.getTime()
 }
 
 /**
- * check if every element in an array is undefined
- * @param {*} array
- * @returns
+ * Checks if every element within the array of events is undefined
+ * @param {array} - 
+ * @returns - Boolean for whether all elements are undefined with the events array
  */
 function allElementsAreUndefined (array) {
+
+  // Returns boolean for whether all elements are undefined within the events array
   return array.every(element => element === undefined)
 }
 
 /**
- * @return {object} JSX Table
+ * @return {object} - Home page for the website
  */
 function Home () {
+  
+  // Constant for local information stored about current user
   const user = JSON.parse(localStorage.getItem('user'))
+
+  // All React states used for various purposes within the Home object
   const [radius, setRadius] = React.useState('any')
   const [events, setEvents] = React.useState([])
   const [name, setName] = React.useState(user ? user.name : '')
@@ -77,6 +104,7 @@ function Home () {
   const [dim, setDim] = React.useState('none')
   const [transformer, setTransform] = React.useState('translateX(100%)')
 
+  // Effect used to fetch events from the database when Home page is loaded
   React.useEffect(() => {
     getEventsFromDB()
     showPastEvents = false
@@ -84,6 +112,10 @@ function Home () {
 
   const history = useNavigate()
 
+  /**
+   * Logs out user and removes all locally stored information about them. Also,
+   * routes the user back to the Login page
+   */
   const logout = () => {
     localStorage.removeItem('user')
     setName('')
@@ -92,16 +124,21 @@ function Home () {
     history('/')
   }
 
+  /**
+   * Transfers user to the Event Form page when they want to post an event
+   */
   const createEvent = () => {
     history('/eventform')
   }
 
-  const deleteEvent = () => {
-    console.log('delete button clicked')
-    console.log('user: ', user)
-  }
-
+  /**
+   * Toggles the hidden sliding menu on the right side of the page and dims rest of page
+   * @param {string} action - String that signifies whether to close or open sliding meunu
+   */
   const togglePanel = (action) => {
+
+    // If string is 'close' then we translate the sliding menu to hide it and undim the page. If
+    // the string is 'open' then we translate the sliding menu to be seen and dim background
     if (action === 'close') {
       setTransform('translateX(100%)')
       setDim('none')
@@ -111,20 +148,27 @@ function Home () {
     }
   }
 
+  // API key for Google
   Geocode.setApiKey('AIzaSyAZwTrchd6eBtPRB7m1VOz5Fh5smHba5Us')
 
+  /**
+   * Call to the backend to retrieve events from the database
+   */
   const getEventsFromDB = () => {
     fetch('http://localhost:3010/v0/eventform', {
       method: 'GET'
     })
       .then((res) => {
+
+        // If there is an issue with the response, display it, otherwise return events json
         if (!res.ok) {
           throw res
         }
         return res.json()
       })
       .then((json) => {
-        console.log(json.data)
+        
+        // Sort events from database if they are retrieve successfully and display them
         for (let i = 0; i < json.data.length; i++) {
           json.data[i].dateInteger = returnDateInt(json.data[i])
         }
@@ -134,58 +178,79 @@ function Home () {
         setEvents(json.data)
       })
       .catch((err) => {
+
+        // Alert user if there has been error retrieving events
         console.log(err)
         alert('Error reading event')
       })
   }
 
-  /* this function gets called when the 'search' button is pressed */
+  /**
+   * Retrieves and sets the address and coordinates of the address that was searched by the user,
+   * then sets the events according to filters applied by user
+   * @param {string} value - Address currently typed in the search bar
+   */
   const handleSelect = async value => {
+
+    // Retrieve latitude and longitude from geocode
     const results = await geocodeByAddress(value)
     const latLng = await getLatLng(results[0])
+
+    // Set the address state to the value and assign the global longitude and latitude
+    // to the longitude and latitude of that address
     setAddress(value)
     globalCoordinates.lat = latLng.lat
     globalCoordinates.lng = latLng.lng
 
-    // for each event, calculate distance and add it as an event property, then figure out if they are in radius
+    // For each event, calculate the distance and add it as an event property, then figure out if they are within the radius
     const eventsSortingCopy = [...events]
     for (let i = 0; i < eventsSortingCopy.length; i++) {
       eventsSortingCopy[i].distance = calculateDistanceInMiles(globalCoordinates.lat, globalCoordinates.lng, eventsSortingCopy[i].latitude, eventsSortingCopy[i].longitude)
       if (radius == 'any') {
         eventsSortingCopy[i].inRadius = true
-      } else if (eventsSortingCopy[i].distance <= parseInt(radius)) { // if distance is in the radius, display
+      } else if (eventsSortingCopy[i].distance <= parseInt(radius)) {
         eventsSortingCopy[i].inRadius = true
-      } else { // not in radius
+      } else {
         eventsSortingCopy[i].inRadius = false
       }
     }
 
-    // sort the events based on their distance property
+    // Sort the events based on the difference of the date integers
     eventsSortingCopy.sort((a, b) => {
       return a.distance - b.distance
     })
 
-    // set the events now that they are sorted
+    // Set the currently displayed events to the sorted copy of events list
     setEvents(eventsSortingCopy);
   }
 
-
+  /**
+   * Sorts the events displayed from earliest to latest when the "Sort By Date" is selected
+   */
   const handleSortByDate = () => {
+
+    // Create copy of events list and add new property "dateInteger" (miliseconds returned by returnDateInt)
     const eventsSortingCopy = [...events]
     for (let i = 0; i < eventsSortingCopy.length; i++) {
       eventsSortingCopy[i].dateInteger = returnDateInt(eventsSortingCopy[i])
     }
 
+    // Sort the events based on the difference of the date integers
     eventsSortingCopy.sort((a, b) => {
       return a.dateInteger - b.dateInteger
     })
 
-    // set the events now that they are sorted
+    // Set the currently displayed events to the sorted copy of events list
     setEvents(eventsSortingCopy)
   }
 
-  /* changes the viewing state of events when the show past events toggle is pressed */
+  /**
+   * Displays the past events when the "Show Past Events" button is selected
+   */
   const handleShowPastEvents = () => {
+
+    // Creates copy of the events list and changes their view property depending on whether
+    // the user has requested past events or not
     showPastEvents = !showPastEvents
     const eventsCopy = [...events]
     const eventsCopyLength = eventsCopy.length
@@ -200,44 +265,57 @@ function Home () {
         }
       }
     }
-    setEvents(eventsCopy) // trigger screen reset
+
+    // Set the events to the new copy of the events list with altered view properties
+    setEvents(eventsCopy)
   }
 
+  /**
+   * Filters and sets the events that are within the radius provided
+   * @param {object} e - Radius selected by the user
+   */
   const handleRadiusChange = (e) => {
+
+    // Create copy of events list
     const eventsCopy = [...events]
     const eventsCopyLength = eventsCopy.length
     console.log('handling change')
 
+    // If the radius is "any" display all events
     if (e.target.value == 'any') {
-      for (let i = 0; i < eventsCopyLength; i++) { // display all when radius is any
+      for (let i = 0; i < eventsCopyLength; i++) {
         eventsCopy[i].inRadius = true
       }
     } else {
+
+      // Otherwise, parse through the events and check if they are within the radius
       const newRadius = parseInt(e.target.value)
       for (let i = 0; i < eventsCopyLength; i++) {
         if ('distance' in eventsCopy[i]) {
-          if (eventsCopy[i].distance > newRadius) { // if the distance is outside of the radius, don't display it
+          if (eventsCopy[i].distance > newRadius) { 
             eventsCopy[i].inRadius = false
           } else {
             eventsCopy[i].inRadius = true
           }
-        } else { // if the event doesn't have a distance, just keep it displayed
+        } else {
           eventsCopy[i].inRadius = true
         }
       }
     }
 
+    // Set the new radius state and events list state
     setRadius(e.target.value)
     setEvents(eventsCopy)
   }
 
   /**
-   * Generate formatted output of events
-   * @param {*} events
-   * @returns
+   * Generate JSX for events onto the Home page
+   * @param {array} events - Array containg event objects
+   * @returns - JSX for event postings
    */
-
   const generateEvents = (events) => {
+
+    // Change the views of the events depending on whether the user wants past events
     for (let i = 0; i < events.length; i++) {
       if (showPastEvents) {
         events[i].view = true
@@ -250,15 +328,21 @@ function Home () {
       }
     }
 
+    // Returns list of events that meet specified criteria by user
     const eventsList = events.map((event) => {
-      if ((event.view == false) || (event.inRadius == false)) { // if we don't want to view the event, just return
+
+      // If the event does not meet the user's filters, then return nothing for event
+      if ((event.view == false) || (event.inRadius == false)) {
         return
       }
 
+      // If the user specifies distance, attach the distance to event data
       let distanceRender = ''
       if ('distance' in event) {
         distanceRender = ' (' + event.distance + ' mi)'
       }
+
+      // JSX for event posting if it meets filter criteria
       return (
         <div className='event'>
           <div className='eventHalf'>
@@ -282,6 +366,9 @@ function Home () {
         </div>
       )
     })
+
+    // If objects within the events list are undefined, return JSX displaying that no
+    // results were found for the request
     if (allElementsAreUndefined(eventsList)) {
       return (
         <div id='failedSearchContainer'>
@@ -289,10 +376,14 @@ function Home () {
         </div>
       )
     }
+
+    // Return JSX for events
     return eventsList
   }
 
   return (
+    
+    // JSX for Home page
     <div>
       <div id='sidePanel' style={{ transform: transformer }}>
         <div id='profileContainer'>
