@@ -54,6 +54,7 @@ function Login () {
   }
 
   // set up google sign in div
+  // https://www.youtube.com/watch?v=roxC8SMs7HU&list=LL&index=1&t=845s&ab_channel=CooperCodes
   useEffect(() => {
     google.accounts.id.initialize({
       client_id: '792919383337-pnkkhet0sprdmlf00ojncglrujh3ve0r.apps.googleusercontent.com',
