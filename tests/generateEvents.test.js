@@ -1,6 +1,9 @@
 const returnDateInt = require('../frontend/src/components/Home.jsx').returnDateInt;
 jest.mock("dateformat", () => jest.fn());
 
+/**
+ * Gets the current date and time and stores it as an integer.
+ */
 var showPastEvents = true;
 const todaysDate = new Date()
 todaysDate.setHours(0, 0, 0, 0)
@@ -65,7 +68,10 @@ var events = [
     }
 ];
 
-// For testing purposes only
+/**
+ * A copy of the generateEvents(event) function from Home.jsx
+ * for testing purposes only.
+*/
 const generateEvents = (events) => {
     for (let i = 0; i < events.length; i++) {
       if (showPastEvents) {
@@ -80,6 +86,10 @@ const generateEvents = (events) => {
     }
 }
 
+/**
+ * Tests to see if all events are set to be displayed on the
+ * homepage, even ones that have already passed.
+ */
 test('Show all events', () => {
     generateEvents(events);
     expect(events[0].view).toBe(true);
@@ -89,6 +99,10 @@ test('Show all events', () => {
     expect(events[4].view).toBe(true);
 });
 
+/**
+ * Tests to see if only upcoming events are set to be displayed 
+ * on the homepage, not past events.
+ */
 test('Do not show past events', () => {
     showPastEvents = false;
     generateEvents(events);

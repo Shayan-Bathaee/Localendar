@@ -5,6 +5,9 @@ require('jest-fetch-mock').enableMocks();
 global.alert = jest.fn();
 global.fetch = require('jest-fetch-mock');
 
+/**
+ * Function that is used to test writing the event to the backend.
+ */
 let app = express();
 app.use(express.json());
 app.post('/v0/eventform', async (req, res) => {
@@ -17,7 +20,7 @@ app.post('/v0/eventform', async (req, res) => {
   res.status(200).send({ eventname, email, eventdate, eventtime, eventlocation, latitude, longitude, eventdescription })
 });
 
-
+// Sample events used for testing
 const newEvent = {
     eventname: 'New Event',
     email: 'testing@ucsc.edu',
@@ -38,6 +41,10 @@ const badEvent = {
     eventdescription: 'testing bad event'
 }
 
+/**
+ * Tests to see if the backend POST call successfully posts the event
+ * that is correctly formatted.
+ */
 test('Post new event', async () => {
     const response = await request(app).post("/v0/eventform").send(newEvent)
     expect(response.body.eventname).toBe('New Event');
@@ -50,7 +57,10 @@ test('Post new event', async () => {
     expect(response.body.eventdescription).toBe('testing new event');
 });
 
-
+/**
+ * Tests to see if the backend POST call throws an error when the event
+ * is not correctly formatted.
+ */
 test('Post call throws error', async () => {
     const response = await request(app).post("/v0/eventform").send(badEvent)
     expect(response.status).toBe(400);

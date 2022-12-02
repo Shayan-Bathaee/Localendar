@@ -7,16 +7,25 @@ import PlacesAutocomplete, {
   getLatLng
 } from 'react-places-autocomplete'
 
-// writes an event to the database
-// event: an object containing:
-// eventname
-// email
-// eventdate ('YYYY-MM-DD')
-// eventtime ('HH:MM:SS')
-// eventlocation
-// eventdescription
+
+/**
+ * Writes an event to the database.
+ * If newEvent is invalid, an alert pop up window is displayed
+ * with the message "Error setting up the event"
+ * 
+ * @return {*} response.json
+ * @param {*} newEvent
+ * newEvent is an object containing: 
+ * eventname
+ * email
+ * eventdate ('YYYY-MM-DD')
+ * eventtime ('HH:MM:SS')
+ * eventlocation
+ * latitude
+ * longitude
+ * eventdescription
+ */
 function writeEventToDB (newEvent) {
-  /* write event to database */
   fetch('http://localhost:3010/v0/eventform', {
     method: 'POST',
     body: JSON.stringify(newEvent),
@@ -25,7 +34,6 @@ function writeEventToDB (newEvent) {
     }
   })
     .then((res) => {
-      // console.log(res);
       if (!res.ok) {
         throw res
       } return res.json()
@@ -39,16 +47,25 @@ function writeEventToDB (newEvent) {
     })
 }
 
+
+/**
+ * Handles creating the new event object that will be 
+ * passed to the function writeEventToDB(newEvent)
+ */
 function NewEvent () {
   const [inputs, setInputs] = useState({})
-
   const [address, setAddress] = React.useState('')
   const [coordinates, setCoordinates] = React.useState({
     lat: null,
     lng: null
   })
 
-
+  /**
+   * Handles setting the location and coordinates of the event
+   * from the address entered into the field.
+   * 
+   * @param {*} value
+  */
   const handleSelect = async value => {
     const results = await geocodeByAddress(value)
     const latLng = await getLatLng(results[0])
@@ -56,23 +73,30 @@ function NewEvent () {
     setCoordinates(latLng)
   }
 
+  /**
+   * Sets the state variables to the information entered on the form.
+   * 
+   * @param {*} event
+   */
   const handleChange = (event) => {
     const name = event.target.name
     const value = event.target.value
     setInputs((values) => ({ ...values, [name]: value }))
   }
 
-
+  /**
+   * Handles the post button when pressed.
+   * First gets the email of the user that is currently logged in.
+   * Then creates the newEvent object by setting the variables
+   * to the states that stored the entered information. It then
+   * passes newEvent to writeEventToDB() and navigates back to
+   * the homepage. 
+   * 
+   * @param {*} event
+   */
   const handlePost = (event) => {
     event.preventDefault()
-    // get user
     const user = JSON.parse(localStorage.getItem('user'))
-    // build new event
-    // if(!coordinates.lat) 
-    //const isEnabled = coordinates.lat.length > 0
-    //console.log(isEnabled)
-
-
 
     const newEvent = {
       eventname: inputs.event_name,
@@ -84,20 +108,24 @@ function NewEvent () {
       longitude: coordinates.lng,
       eventdescription: inputs.description
     }
-    // console.log(coordinates.lat)
-    // console.log(address)
     writeEventToDB(newEvent)
-    history('/homepage') // take user back to homepage when event is done
+    history('/homepage')
   }
 
   const history = useNavigate()
 
+  /**
+   * Handles the cancel button when pressed. 
+   * It navigates back to the homepage without storing any
+   * of the entered information.
+   */
   const cancel = () => {
     window.history.back()
   }
 
-  
-
+  /**
+   * Displays the page and creates the event form.
+   */
   return (
     <div>
       <div>

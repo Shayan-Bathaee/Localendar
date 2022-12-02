@@ -1,7 +1,9 @@
+/* Sets the background color of the Create an Event page */
 body {
     background-color: #F2F2E9;
 }
 
+/* Formats the page title */
 .page-title {
     font-family: "Verdana";
     font-size: xx-large;
@@ -10,6 +12,7 @@ body {
     margin-top: 40px;
 }
 
+/* Formats the form text input boxes, giving them rounded corners */
 .event-form input, textarea{
     display: inline;
     width: 80%;
@@ -23,11 +26,13 @@ body {
     vertical-align: auto;
 }
 
+/* Formats the inside text font of the input fields */
 .event-form textarea{
     height: 15vh;
     font-family: "Verdana";
 }
 
+/* Formats the labels of the text input boxes */
 .event-form label {
     display: block;
     flex-direction: row;
@@ -48,6 +53,7 @@ body {
     resize: none;
 }
 
+/* Formats the post and cancel buttons, giving them rounded corners */
 .post-bttn, .cancel-bttn {
     display: inline-block;
     width: 10%;
@@ -63,10 +69,12 @@ body {
     margin: 5px;
 }
 
+/* Sets post button color to orange */
 .post-bttn{ 
     background-color: #F48E4A;
 }
 
+/* Sets cancel button color to gray */
 .cancel-bttn{
     margin-left: 74.5%;
     background-color: #D3D3D3;
